@@ -60,44 +60,57 @@ def get_next_page(page_soup):
     return None
 
 
-session = requests.Session()
-USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.3'
-session.headers.update({
-    'User-Agent': USER_AGENT,
-})
+def get_session():
+    session = requests.Session()
+    USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.3'
+    session.headers.update({
+        'User-Agent': USER_AGENT,
+    })
+    return session
 
-next_page = True
-pages = []
-data = {}
-url = 'https://www.mixesdb.com/w/Category:Essential_Mix'
+def get_tracklist_links(session):
+    """
+    Gets tracklist links and basic to all the mixes in the Essential Mix category
+    """
+    next_page = True
+    pages = []
+    data = {}
+    url = 'https://www.mixesdb.com/w/Category:Essential_Mix'
 
-while next_page:
-    print(len(pages), url)
-    response = session.get(url)
-    soup = BeautifulSoup(response.content, 'html.parser')
+    while next_page:
+        print(len(pages), url)
+        response = session.get(url)
+        soup = BeautifulSoup(response.content, 'html.parser')
 
-    mixes = soup.find(id='catMixesList')
-    mix_links = mixes.find_all('a')
+        mixes = soup.find(id='catMixesList')
+        mix_links = mixes.find_all('a')
 
-    for link in mix_links:
-        try:
-            mix_url, mix_data = parse_mix_link(link)
-            if mix_url and mix_data:
-                data[mix_url] = mix_data
-        except Exception as e:
-            print(link)
-            print(e)
+        for link in mix_links:
+            try:
+                mix_url, mix_data = parse_mix_link(link)
+                if mix_url and mix_data:
+                    data[mix_url] = mix_data
+            except Exception as e:
+                print(link)
+                print(e)
 
-    next_page = get_next_page(soup)
-    if next_page:
-        pages.append(next_page)
-        url = 'https://www.mixesdb.com/%s' % next_page
-    time.sleep(5)
+        next_page = get_next_page(soup)
+        if next_page:
+            pages.append(next_page)
+            url = 'https://www.mixesdb.com/%s' % next_page
+        time.sleep(5)
+
+    data['pages'] = pages
+    with open('./data.json', 'w') as fp:
+        json.dump(data, fp)
+
+    return data
 
 
-data['pages'] = pages
-with open('./data.json', 'w') as fp:
-    json.dump(data, fp)
-
-
-
+session = get_session()
+# if data.json exists, we don't need to fetch the tracklist links
+try:
+    with open('./data.json', 'r') as fp:
+        data = json.load(fp)
+except Exception:
+    data = get_tracklist_links(session)

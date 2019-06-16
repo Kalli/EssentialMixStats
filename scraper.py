@@ -144,7 +144,64 @@ def get_tracklists(session, data):
     return data
 
 
+def parse_tracklist(text):
+    """
+    Parse tracklist and categories from MixesDB detail page contents
+    """
+    tracklist, categories = None, None
+    duplicate = False
+    lines = text.split('\n')
+
+    # duplicate or not fake mix:
+    if any(message in lines[0] for message in ['Fake', 'Repeat']):
+        duplicate = lines[1].replace(' |Original  =', '')
+        return tracklist, categories, duplicate
+
+    category_index = next((i for i, l in enumerate(lines) if '[[Category:' in l), len(lines))
+
+    if '== Tracklist ==' in lines:
+        tracklist = filter(None, lines[lines.index('== Tracklist ==') + 1: category_index])
+        categories = filter(None, lines[category_index:])
+        categories = [c.replace('[[Category:', '').replace(']]', '') for c in categories]
+
+    return tracklist, categories, duplicate
+
+
+def has_data(mix_data):
+    try:
+        tracks = 'tracks' in mix_data and mix_data['tracks'] and len(mix_data['tracks']) > 0
+        categories = 'categories' in mix_data and mix_data['categories'] and len(mix_data['categories']) > 0
+        duplicate =  'duplicate' in mix_data and mix_data['duplicate'] != False
+        return (tracks and categories) or duplicate
+    except Exception as e:
+        print(mix_data)
+        print(e)
+
+
+def parse_tracklists(data):
+    """
+    Parse tracklist data into tracklists and categories for all tracklists
+    """
+    for index, (url, mix_data) in enumerate(data.items()):
+
+        # if data is not present parse it
+        if not has_data(mix_data):
+            tracks, categories, duplicate = parse_tracklist(mix_data['tracklist'])
+            mix_data['categories'] = categories
+            mix_data['tracks'] = tracks
+            mix_data['duplicate'] = duplicate
+
+        # data still not present, something is wrong:
+        if not has_data(mix_data):
+            print('https://www.mixesdb.com%s' % url)
+
+    with open('./data.json', 'w') as fp:
+        json.dump(data, fp)
+    return data
+
+
+
 session = get_session()
 data = get_tracklist_links(session)
 data = get_tracklists(session, data)
-
+data = parse_tracklists(data)

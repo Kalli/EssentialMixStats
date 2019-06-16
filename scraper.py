@@ -9,6 +9,8 @@ DATE_REGEX = re.compile('(\d{4}-\d{2}-\d{2})')
 VENUE_REGEX = re.compile(' @ (.*) - ')
 ARTIST_REGEX = re.compile(' - (.*) [-|\(]')
 
+LABEL_REGEX = re.compile('(\[.+\]$)')
+
 
 # mixes that should be ignored, duplicates, not actually essential mixes etc
 MIXES_TO_IGNORE = [
@@ -178,6 +180,64 @@ def has_data(mix_data):
         print(e)
 
 
+def skip_track(track):
+    skip_lines = ['<list>', '</list>']
+    skip =  any(skip_line in track for skip_line in skip_lines)
+    # ; is used to denote sections
+    section = track[0] == ';'
+    empty = track.strip() == ''
+    return not(skip or section or empty)
+
+
+def parse_tracks(mix_data):
+    """
+    Parse a list of raw track names into a dictionary of artist, track and label
+    """
+    parsed_tracks = []
+
+    tracks = filter(skip_track, mix_data.get('tracks', []))
+
+    for raw_track in tracks:
+        processed_track = raw_track
+
+        # remove leading '#' character
+        if processed_track[0] == '#':
+            processed_track = processed_track[1:].strip()
+
+        # remove leading timestamps
+        processed_track= re.sub('^\[[\d|\?|:]+\]', '', processed_track).strip()
+
+        artist, track, label = 'unknown', 'unknown', 'unknown'
+
+        # Non identified tracks will often contain just question marks
+        if not re.sub('\?+', '', processed_track).strip() == '':
+            label_match = LABEL_REGEX.search(processed_track)
+            label = label_match.group(0) if label_match else ''
+            if label:
+                processed_track = processed_track.replace(label, '').strip()
+                label = label.replace('[', '').replace(']', '').strip()
+
+            segments = processed_track.split(' - ')
+            if len(segments) > 1:
+                artist = segments[0].strip()
+                track = segments[1].strip()
+
+        parsed_tracks.append({'artist': artist, 'track': track, 'label': label})
+
+    fully_parsed = len(parsed_tracks) == len(tracks)
+
+    if not fully_parsed:
+        print(len(parsed_tracks), len(tracks))
+        for index, track in enumerate(tracks):
+            print(track)
+            if len(parsed_tracks) > index:
+                print(parsed_tracks[index])
+            else:
+                print('no track')
+
+    return parsed_tracks
+
+
 def parse_tracklists(data):
     """
     Parse tracklist data into tracklists and categories for all tracklists
@@ -195,10 +255,12 @@ def parse_tracklists(data):
         if not has_data(mix_data):
             print('https://www.mixesdb.com%s' % url)
 
+        if not mix_data['duplicate']:
+            mix_data['processed_tracks'] = parse_tracks(mix_data)
+
     with open('./data.json', 'w') as fp:
         json.dump(data, fp)
     return data
-
 
 
 session = get_session()

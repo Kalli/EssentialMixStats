@@ -267,3 +267,21 @@ session = get_session()
 data = get_tracklist_links(session)
 data = get_tracklists(session, data)
 data = parse_tracklists(data)
+
+
+def clean_data(data):
+    """
+    Remove data that is not needed for the front end piece and save the processed data to the data folder
+    """
+    processed_data = []
+    for key, value in data.items():
+        if not value['duplicate']:
+            value['tracklist'] = value['processed_tracks']
+            del(value['processed_tracks'])
+            del(value['tracks'])
+            value['url'] = key
+            processed_data.append(value)
+    with open('./data/data.json', 'w') as fp:
+        json.dump(processed_data, fp)
+
+clean_data(data)

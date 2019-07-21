@@ -1,5 +1,5 @@
 import {GoogleCharts} from "google-charts"
-import {completeTracklist} from "./lib.js"
+import {completeTracklist, createMixLink} from "./lib.js"
 
 export function drawTrackCount(mixes){
 	let dataTable = new GoogleCharts.api.visualization.DataTable({
@@ -13,33 +13,42 @@ export function drawTrackCount(mixes){
 		],
 	})
 
-	const trackCountsByYear = mixes.reduce((acc, mix) => {
-		if (!mix.duplicate){
+	const mixesByYear = mixes.reduce((acc, mix) => {
+		if (!mix.duplicate && completeTracklist(mix)){
 			const year = mix.date.slice(0, 4)
-			acc[year] ? acc[year].push(mix.tracklist.length) : acc[year] = [mix.tracklist.length]
+			if ( year in acc){
+				acc[year].trackCounts.push(mix.tracklist.length)
+				acc[year].mixes.push(mix)
+			} else {
+				acc[year] = {}
+				acc[year].trackCounts = [mix.tracklist.length]
+				acc[year].mixes = [mix]
+			}
 		}
 		return acc
 	}, {})
 
-	dataTable.addRows(Object.keys(trackCountsByYear).reduce((acc, year) => {
+	dataTable.addRows(Object.keys(mixesByYear).reduce((acc, year) => {
 
-		const mixCount = trackCountsByYear[year].length
-		const average = Math.floor(trackCountsByYear[year].reduce((acc, elem) => acc + elem, 0) / mixCount)
+		const mixCount = mixesByYear[year].trackCounts.length
+		const average = Math.floor(mixesByYear[year].trackCounts.reduce((acc, elem) => acc + elem, 0) / mixCount)
 
-		const sorted = trackCountsByYear[year].sort((a, b) => a - b)
+		const sorted = mixesByYear[year].trackCounts.sort((a, b) => a - b)
 	    const middle = Math.floor((mixCount - 1) / 2)
 		const median = mixCount % 2 ? sorted[middle] :  (sorted[middle] + sorted[middle + 1]) / 2.0
 
-		const max = Math.max(...trackCountsByYear[year])
-		const min = Math.min(...trackCountsByYear[year])
-
+		const max = sorted[sorted.length - 1]
+		const min = sorted[0]
 
 		const lowestQuartile = sorted[Math.floor((mixCount-1) * 0.25)]
 		const highestQuartile = sorted[Math.floor((mixCount-1) * 0.75)]
 
-		let tooltip = `Number of mixes: ${trackCountsByYear[year].length} <br> `
-		tooltip += `Most tracks: ${max} <br>`
-		tooltip += `Fewest tracks : ${min} <br>`
+		const mostTracks = createMixLink(mixesByYear[year].mixes.find((mix) => mix.tracklist.length === max));
+		const fewestTracks = createMixLink(mixesByYear[year].mixes.find((mix) => mix.tracklist.length === min));
+
+		let tooltip = `Number of mixes: ${sorted.length} <br> `
+		tooltip += `Most tracks: ${max} - ${mostTracks}<br>`
+		tooltip += `Fewest tracks : ${min} - ${fewestTracks} <br>`
 		tooltip += `Average track count: ${average}<br>`
 		tooltip += `Median track count: ${median}`
 		acc.push([year, min, lowestQuartile, highestQuartile, max, tooltip])

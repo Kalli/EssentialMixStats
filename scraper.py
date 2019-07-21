@@ -268,6 +268,8 @@ data = get_tracklist_links(session)
 data = get_tracklists(session, data)
 data = parse_tracklists(data)
 
+LENGTH_REGEX = re.compile('StandardShow(.*?)\}')
+
 
 def clean_data(data):
     """
@@ -276,6 +278,11 @@ def clean_data(data):
     processed_data = []
     for key, value in data.items():
         if not value['duplicate']:
+            match = LENGTH_REGEX.search(value['tracklist'])
+            if match:
+                value['length'] = match.group(1)
+            else:
+                value['length'] = '?'
             value['tracklist'] = value['processed_tracks']
             del(value['processed_tracks'])
             del(value['tracks'])

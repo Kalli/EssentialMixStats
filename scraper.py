@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import json
 import time
+from copy import deepcopy
 
 
 DATE_REGEX = re.compile('(\d{4}-\d{2}-\d{2})')
@@ -164,7 +165,11 @@ def parse_tracklist(text):
     if '== Tracklist ==' in lines:
         tracklist = filter(None, lines[lines.index('== Tracklist ==') + 1: category_index])
         categories = filter(None, lines[category_index:])
-        categories = [c.replace('[[Category:', '').replace(']]', '') for c in categories]
+        categories = [c.replace('[[Category:', '').replace(']]', '').strip() for c in categories]
+
+    for category in categories:
+        if '{{Repeated|' in category:
+            duplicate = True
 
     return tracklist, categories, duplicate
 
@@ -270,6 +275,11 @@ data = parse_tracklists(data)
 
 LENGTH_REGEX = re.compile('StandardShow(.*?)\}')
 
+UNNECESSARY_CATEGORIES = [
+    re.compile('Essential Mix\|\d\d\d\d-\d\d-\d\d'),
+    re.compile('Ibiza \d\d\d\d'),
+]
+
 
 def clean_data(data):
     """
@@ -278,15 +288,32 @@ def clean_data(data):
     processed_data = []
     for key, value in data.items():
         if not value['duplicate']:
+
             match = LENGTH_REGEX.search(value['tracklist'])
             if match:
                 value['length'] = match.group(1)
             else:
                 value['length'] = '?'
+
+            # Clean up the categories
+            remove_categories = ['Essential Mix'] + value['artists']
+            remove_categories.append(value['date'][0:4])
+
+            categories = deepcopy(value['categories'])
+
+            for category in value['categories']:
+                if category.strip() in remove_categories:
+                    categories.remove(category)
+                for regex in UNNECESSARY_CATEGORIES:
+                    if regex.match(category):
+                        categories.remove(category)
+
+            value['categories'] = categories
             value['tracklist'] = value['processed_tracks']
             del(value['processed_tracks'])
             del(value['tracks'])
             value['url'] = key
+
             processed_data.append(value)
     with open('./data/data.json', 'w') as fp:
         json.dump(processed_data, fp)

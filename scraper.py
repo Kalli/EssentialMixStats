@@ -280,6 +280,48 @@ UNNECESSARY_CATEGORIES = [
     re.compile('Ibiza \d\d\d\d'),
 ]
 
+# venues that aren't properly parsed from titles
+# todo should this be added to the venue attribute?
+venue_categories = [
+    "Cream",
+    "Privilege (Ibiza)",
+    "Unknown Gig / Location",
+    "Space (Ibiza)",
+    "Que Club",
+    "Ministry Of Sound",
+    "Glastonbury Festival",
+    "One Big Weekend",
+    "Creamfields",
+    "Gatecrasher",
+    "Homelands",
+    "Surfcomber Hotel",
+    "WMC",
+    "The Warehouse Project",
+    "Amnesia (Ibiza)",
+    "Pacha (Ibiza)",
+    "Sankeys (Ibiza)",
+]
+
+# artist names that aren't properly parsed from titles
+artist_categories = [
+    "Pete Tong",
+    "Carl Cox",
+    "Various",
+    "John Digweed",
+    "Danny Rampling",
+    "Annie Mac",
+    "Chemical Brothers",
+    "Judge Jules",
+    "Sasha",
+    "Fergie",
+    "Dave Pearce",
+    "Fatboy Slim",
+    "Paul Oakenfold",
+    "Seb Fontaine",
+    "Eddie Halliwell",
+    "Eric Prydz"
+]
+
 
 def clean_data(data):
     """
@@ -296,7 +338,7 @@ def clean_data(data):
                 value['length'] = '?'
 
             # Clean up the categories
-            remove_categories = ['Essential Mix'] + value['artists']
+            remove_categories = list(set(['Essential Mix'] + value['artists'] + artist_categories + venue_categories))
             remove_categories.append(value['date'][0:4])
 
             categories = deepcopy(value['categories'])

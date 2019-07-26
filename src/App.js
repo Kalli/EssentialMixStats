@@ -1,6 +1,7 @@
 import React, { Component} from "react"
 
 import TrackCounts from "./TrackCounts"
+import MixCategories from "./MixCategories"
 
 class App extends Component{
     constructor(props) {
@@ -30,6 +31,7 @@ class App extends Component{
 	render(){
     	const loading = this.state.loading && <div>Data is loading</div>
     	const trackCounts = !this.state.loading && <TrackCounts mixes={this.state.data}/>
+    	const mixCategories = !this.state.loading && <MixCategories mixes={this.state.data}/>
 
 		return(
 			<>
@@ -41,6 +43,9 @@ class App extends Component{
 					{loading}
 					<div  className="center-block col-xs-12">
 							{trackCounts}
+					</div>
+					<div  className="center-block col-xs-12">
+							{mixCategories}
 					</div>
 				</div>
 			</>

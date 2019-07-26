@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import {drawTrackCount} from './drawTrackCount.js'
+import {drawCategories} from './drawCategories.js'
 import {GoogleCharts} from 'google-charts';
 
 
@@ -60,6 +61,7 @@ $(document).ready(function(){
 			})
 
     	    drawTrackCount(mixes)
+    	    drawCategories(mixes)
         }
     })
 })

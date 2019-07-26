@@ -1,5 +1,7 @@
 import React, { Component} from "react"
 
+import TrackCounts from "./TrackCounts"
+
 class App extends Component{
     constructor(props) {
         super(props);
@@ -27,15 +29,19 @@ class App extends Component{
     }
 	render(){
     	const loading = this.state.loading && <div>Data is loading</div>
+    	const trackCounts = !this.state.loading && <TrackCounts mixes={this.state.data}/>
 
 		return(
 			<>
-				<div className="row text-center main">
+				<div className="row text-center">
 					<h1 className="text-center">Essential Mix stats</h1>
 					<p className="lead">
 						Explore the statistics and history of the BBC Essential Mix.
 					</p>
 					{loading}
+					<div  className="center-block col-xs-12">
+							{trackCounts}
+					</div>
 				</div>
 			</>
 		)

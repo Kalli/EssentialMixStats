@@ -1,5 +1,6 @@
 import React, { Component} from "react"
 
+import RangeFilter from "./RangeFilter"
 import TrackCounts from "./TrackCounts"
 import MixCategories from "./MixCategories"
 
@@ -33,13 +34,21 @@ class App extends Component{
     	const trackCounts = !this.state.loading && <TrackCounts mixes={this.state.data}/>
     	const mixCategories = !this.state.loading && <MixCategories mixes={this.state.data}/>
 
+    	const value = {"min": 1993, "max": 2019}
+    	const rangeFilter = !this.state.loading && <RangeFilter
+		    min={1993}
+		    max={2019}
+		    value={value}
+	    />
+
 		return(
 			<>
 				<div className="row text-center">
 					<h1 className="text-center">Essential Mix stats</h1>
 					<p className="lead">
-						Explore the statistics and history of the BBC Essential Mix.
+						Explore the statistics and history of the BBC Radio 1 Essential Mix.
 					</p>
+					{rangeFilter}
 					{loading}
 					<div  className="center-block col-xs-12">
 							{trackCounts}

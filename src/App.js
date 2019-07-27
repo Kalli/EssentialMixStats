@@ -5,7 +5,7 @@ import CategoryFilter from "./CategoryFilter"
 import TrackCounts from "./TrackCounts"
 import MixCategories from "./MixCategories"
 
-import {reduceCategories} from "./lib"
+import {categoryCounts} from "./lib"
 
 class App extends Component{
     constructor(props) {
@@ -23,19 +23,20 @@ class App extends Component{
                 return response.json()
             })
             .then( (json) => {
-            	const categories = reduceCategories(json)
-            	const allCategories = categories.reduce((acc, e) => {
-		            	acc.push(e.name)
-			            return acc
+            	const allCategories = json.reduce((acc, e) => {
+            		e.categories.forEach((category) => {
+            			if (!acc.includes(category)){
+            				acc.push(category)
+			            }
+		            })
+		            return acc
 	            }, [])
-
             	this.setState({
 		            loading: false,
 		            data: json,
 		            allData: json,
-		            allCategories: allCategories,
-		            categories: categories,
-		            selectedCategories: allCategories
+		            selectedCategory: 'All',
+		            allCategories: allCategories
             	})
             });
     }
@@ -48,46 +49,22 @@ class App extends Component{
     }
 
     handleRangeChange = (range) => {
-    	this.filterData(range, this.state.selectedCategories)
+    	this.filterData(range, this.state.selectedCategory)
         this.setState({ range: range })
     }
 
     handleCategoryChange = (category) => {
-    	const selectedCategories = this.state.selectedCategories
-	    const index = selectedCategories.indexOf(category.name)
-    	if (index !== -1){
-    		selectedCategories.splice(index, 1);
-	    }else{
-    		selectedCategories.push(category.name)
-	    }
-    	this.filterData(this.state.range, selectedCategories)
+    	this.filterData(this.state.range, category)
+        this.setState({ selectedCategory: category })
     }
 
-    selectAllCategories = () => {
-	    this.setState({selectedCategories: this.state.allCategories})
-	    this.filterData(this.state.range, this.state.allCategories)
-    }
-
-    selectNoCategories = () => {
-	    this.setState({selectedCategories: []})
-        this.filterData(this.state.range, [])
-    }
-
-    filterData(dateRange, selectedCategories){
+    filterData(dateRange, selectedCategory){
 	    const filteredMixes = this.state.allData.filter((mix) => {
-
-	    	if (selectedCategories.length === 0){
-	    		return false
-		    }
-
-            const all = selectedCategories === this.state.allCategories
-
 	    	const year = Number(mix.date.slice(0,4))
 	    	const inRange = dateRange.min <= year && year <= dateRange.max
-
-		    return inRange && (all || selectedCategories.every((e) => mix.categories.includes(e)))
+		    return inRange && (selectedCategory === "All" || mix.categories.includes(selectedCategory))
 	    })
-		this.setState({data: filteredMixes, categories:reduceCategories(filteredMixes)})
+		this.setState({data: filteredMixes})
     }
 
 	render(){
@@ -104,12 +81,11 @@ class App extends Component{
 	    />
 
         const categoryFilter = !this.state.loading && <CategoryFilter
-			categories={this.state.categories}
+			categories={categoryCounts(this.state.data)}
+			allCategories={this.state.allCategories}
 			minCount={5}
-			selectedCategories={this.state.selectedCategories}
+			selectedCategory={this.state.selectedCategory}
 		    changeHandler={this.handleCategoryChange}
-		    selectAllCategories={this.selectAllCategories}
-		    selectNoCategories={this.selectNoCategories}
 		/>
 
 		return(

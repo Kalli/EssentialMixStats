@@ -7,67 +7,54 @@ export default class CategoryFilter extends Component {
         this.state = {
         	categories: props.categories,
 	        minCount: props.minCount,
-	        selectedCategories: props.selectedCategories
+	        selectedCategory: props.selectedCategory,
+	        topCategories: Object.entries(props.categories).filter((e) => e[1] > 5).map((e) => e[0]),
+	        showAll: false,
+	        allCategories: props.allCategories.sort((a, b) => props.categories[b] - props.categories[a])
         }
     }
 
     handleShow = () => {
-        const minCount = this.state.minCount === 5 ? 0 : 5
-	    this.setState({minCount: minCount})
+	    this.setState({showAll: !this.state.showAll})
     }
 
     render() {
     	const {
     		categories,
+		    allCategories,
 		    changeHandler,
-    		selectedCategories,
-    	    selectAllCategories,
-		    selectNoCategories
+    		selectedCategory,
 	    } = this.props
-	    const categoryCount = Object.keys(this.state.categories).length
-
         return (
             <div className={"col-xs-8 col-xs-offset-2"} >
 	            <h3>Categories</h3>
 	            <div className={"center-block"}>
-		            <div className={"btn-group"} role="group">
-			            <button
-				            className={"btn btn-default"}
-				            onClick={selectAllCategories}
-				            disabled={selectedCategories.length === categoryCount}
-						>
-				             Select All
-			            </button>
-	                    <button className={"btn btn-default"}
-	                            onClick={selectNoCategories}
-	                            disabled={selectedCategories.length === 0}>
-				             Select None
-	                    </button>
                     <button className={"btn btn-default"} onClick={this.handleShow} >
-		                {this.state.minCount === 5 ? `Show all ${categoryCount} categories` : "Show only top categories" }
+		                {this.state.showAll ? "Show only top categories" : `Show all ${allCategories.length} categories` }
 	                </button>
-                    </div>
-
 	            </div>
-
 	            <div>
-                    {categories.map((category) => this.renderCategory(category, selectedCategories, changeHandler))}
+		            {this.renderCategory("All", categories, selectedCategory, changeHandler) }
+                    {this.state.allCategories.map((category) => this.renderCategory(category, categories, selectedCategory, changeHandler))}
 	            </div>
             </div>
         )
     }
 
-    renderCategory (category, selectedCategories, changeHandler) {
-    	if (category.count > this.state.minCount){
+    renderCategory (category, categories, selectedCategory, changeHandler) {
+    	const count = categories[category] ? categories[category] : 0
+    	if (category === "All" || this.state.showAll || this.state.topCategories.includes(category)){
             return (
-				<label className="checkbox-inline" key={category.name} >
-					<input type="checkbox"
-					       value="{category.name}"
-					       checked={selectedCategories.includes(category.name)}
-					       onChange={(e) => changeHandler(category)}
-					/>
-					{category.name} - {category.count}
-                </label>
+            	<div className={"col-md-4"}>
+                    <label className="radio" key={category} >
+						<input type="radio"
+						       value="{category}"
+						       checked={selectedCategory === category}
+						       onChange={(e) => changeHandler(category)}
+						/>
+						{category} {category !== "All" ? ` - ${count}` : ""}
+                    </label>
+	            </div>
 			)
 	    }
 	}

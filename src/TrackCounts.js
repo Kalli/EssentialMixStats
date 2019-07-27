@@ -10,7 +10,8 @@ export default class TrackCounts extends Component {
 
 	formatData(mixes){
 		const mixesByYear = mixes.reduce((acc, mix) => {
-			if (!mix.duplicate && completeTracklist(mix)){
+			// todo show possibility to only show complete track
+			if (!mix.duplicate){
 				const year = mix.date.slice(0, 4)
 				if ( year in acc){
 					acc[year].trackCounts.push(mix.tracklist.length)

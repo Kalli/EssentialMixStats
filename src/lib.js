@@ -6,8 +6,8 @@ export function completeTracklist(mix){
 	return mix['categories'] && mix['categories'].indexOf('Tracklist: complete') !== -1
 }
 
-export function reduceCategories(mixes, filters) {
-	const mixesByCategory = mixes.reduce((acc, mix) => {
+export function categoryCounts(mixes, filters) {
+	return mixes.reduce((acc, mix) => {
 		if (!mix.duplicate){
 			mix.categories.forEach((category) => {
 				let include = true
@@ -21,6 +21,10 @@ export function reduceCategories(mixes, filters) {
 		}
 		return acc
 	}, {})
+}
+
+export function reduceCategories(mixes, filters) {
+	const mixesByCategory = categoryCounts(mixes, filters)
 	return Object.entries(mixesByCategory).reduce((acc, c) => {
         acc.push({'name': c[0], 'count': c[1]})
 	    return acc

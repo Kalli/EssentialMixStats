@@ -34,10 +34,16 @@ export default class CategoryFilter extends Component {
 	            <h3>Categories</h3>
 	            <div className={"center-block"}>
 		            <div className={"btn-group"} role="group">
-			            <button className={"btn btn-default"} onClick={this.selectAll} >
+			            <button
+				            className={"btn btn-default"}
+				            onClick={this.selectAll}
+				            disabled={this.state.selectedCategories.length === categoryCount}
+						>
 				             Select All
 			            </button>
-	                    <button className={"btn btn-default"}  onClick={this.selectNone} >
+	                    <button className={"btn btn-default"}
+	                            onClick={this.selectNone}
+	                            disabled={this.state.selectedCategories.length === 0}>
 				             Select None
 	                    </button>
                     <button className={"btn btn-default"} onClick={this.handleShow} >

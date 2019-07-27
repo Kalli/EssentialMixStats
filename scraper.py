@@ -227,7 +227,7 @@ def parse_tracks(mix_data):
                 artist = segments[0].strip()
                 track = segments[1].strip()
 
-        parsed_tracks.append({'artist': artist, 'track': track, 'label': label})
+        parsed_tracks.append([artist, track, label])
 
     fully_parsed = len(parsed_tracks) == len(tracks)
 
@@ -322,6 +322,9 @@ artist_categories = [
     "Eric Prydz"
 ]
 
+artists = []
+tracks = []
+labels = []
 
 def clean_data(data):
     """

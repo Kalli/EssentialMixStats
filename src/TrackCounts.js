@@ -6,12 +6,22 @@ import {completeTracklist, createMixLink} from "./lib"
 export default class TrackCounts extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {hideIncomplete: true, twoHours: true}
 	}
+
+	showComplete = () => {
+		this.setState({hideIncomplete: !this.state.hideIncomplete})
+    }
+
+	showTwoHours = () => {
+		this.setState({twoHours: !this.state.twoHours})
+    }
 
 	formatData(mixes){
 		const mixesByYear = mixes.reduce((acc, mix) => {
-			// todo show possibility to only show complete track
-			if (!mix.duplicate){
+			const complete = (!this.state.hideIncomplete || completeTracklist(mix))
+			const twoHours = (!this.state.twoHours || mix.length === "2h")
+			if (!mix.duplicate && complete && twoHours){
 				const year = mix.date.slice(0, 4)
 				if ( year in acc){
 					acc[year].trackCounts.push(mix.tracklist.length)
@@ -59,34 +69,57 @@ export default class TrackCounts extends Component {
 	render(){
 		const mixes = this.formatData(this.props.mixes)
 
-		return 	<Chart
-			height={900}
-			className={"center-block"}
-			chartType="CandlestickChart"
-			loader={<div>Loading Chart</div>}
-			data={[
-				[
-					{id: 'date', label: 'Year', type: 'string'},
-					{id: 'min', label: 'Min', type: 'number'},
-					{id: 'lowQ', label: 'Lowest Q', type: 'number'},
-					{id: 'highQ', label: 'Highest Q', type: 'number'},
-					{id: 'max', label: 'Max', type: 'number'},
-					{type: 'string', role: 'tooltip', 'p': {'html': true}},
-				],
-				...mixes
-			]}
-			options={{
-				title: 'Number of Tracks per Essential Mix by Year',
-				chartArea: { width: '80%' },
-				hAxis: {
-					title: 'Year',
-				},
-				vAxis: {
-					title: 'Tracks per mix',
-				},
-				tooltip: {isHtml: true, trigger: 'selection'},
-				legend: 'none',
-			}}
-		/>
+		return(
+			<>
+				<Chart
+					height={900}
+					className={"center-block"}
+					chartType="CandlestickChart"
+					loader={<div>Loading Chart</div>}
+					data={[
+						[
+							{id: 'date', label: 'Year', type: 'string'},
+							{id: 'min', label: 'Min', type: 'number'},
+							{id: 'lowQ', label: 'Lowest Q', type: 'number'},
+							{id: 'highQ', label: 'Highest Q', type: 'number'},
+							{id: 'max', label: 'Max', type: 'number'},
+							{type: 'string', role: 'tooltip', 'p': {'html': true}},
+						],
+						...mixes
+					]}
+					options={{
+						title: 'Number of Tracks per Essential Mix by Year',
+						chartArea: { width: '80%' },
+						hAxis: {
+							title: 'Year',
+						},
+						vAxis: {
+							title: 'Tracks per mix',
+						},
+						tooltip: {isHtml: true, trigger: 'selection'},
+						legend: 'none',
+					}}
+				/>
+				<div className="pull-left">
+	                <label className="checkbox" >
+						<input type="checkbox"
+						       value="hideIncomplete"
+						       checked={this.state.hideIncomplete}
+						       onChange={this.showComplete}
+						/>
+						Disregard incomplete tracklists
+	                </label>
+					<label className="checkbox" >
+						<input type="checkbox"
+						       value="hideTwoHours"
+						       checked={this.state.twoHours}
+						       onChange={this.showTwoHours}
+						/>
+						Limit to two hour long mixes
+	                </label>
+				</div>
+
+			</>
+		)
 	}
 }

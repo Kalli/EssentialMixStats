@@ -1,5 +1,6 @@
 import {Chart} from 'react-google-charts';
 import React, { Component} from "react"
+import {reduceCategories} from "./lib"
 
 
 export default class MixCategories extends Component {
@@ -8,16 +9,7 @@ export default class MixCategories extends Component {
 	}
 
 	formatData(mixes){
-		const mixesByCategories = mixes.reduce((acc, mix) => {
-			if (!mix.duplicate){
-				mix.categories.forEach((category) => {
-					if (category.indexOf('Tracklist') === -1){
-						acc[category] = acc[category] ? acc[category] + 1 : 1
-					}
-				})
-			}
-			return acc
-		}, {})
+		const mixesByCategories = reduceCategories(mixes, ['Tracklist'])
 
 		const categories = Object.keys(mixesByCategories).reduce((acc, category) => {
 			if (mixesByCategories[category] >= 5) {

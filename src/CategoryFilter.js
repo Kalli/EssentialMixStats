@@ -9,13 +9,44 @@ export default class CategoryFilter extends Component {
 	        minCount: props.minCount,
 	        selectedCategory: props.selectedCategory,
 	        topCategories: Object.entries(props.categories).filter((e) => e[1] > 5).map((e) => e[0]),
-	        showAll: false,
-	        allCategories: props.allCategories.sort((a, b) => props.categories[b] - props.categories[a])
+	        allCategories: props.allCategories.sort((a, b) => props.categories[b] - props.categories[a]),
+            show: "None",
         }
     }
 
     handleShow = () => {
-	    this.setState({showAll: !this.state.showAll})
+        switch (this.state.show){
+	        case "None":
+	        	this.setState({show: "Top"})
+		        break
+	        case "Top":
+	        	this.setState({show: "All"})
+		        break
+	        default:
+		        this.setState({show: "None"})
+        }
+    }
+
+    showButton(allCategories){
+    	let text = ""
+    	switch (this.state.show){
+		    case "None":
+		    	text = "Show top categories"
+			    break
+            case "Top":
+				text = `Show all ${allCategories.length} categories`
+			    break
+		    default:
+		    	text = "Hide categories"
+	    }
+		return (
+		    <div className={"center-block"}>
+                <button className={"btn btn-default"} onClick={this.handleShow} >
+	                {text}
+                </button>
+            </div>
+		)
+
     }
 
     render() {
@@ -25,25 +56,33 @@ export default class CategoryFilter extends Component {
 		    changeHandler,
     		selectedCategory,
 	    } = this.props
+
         return (
             <div className={"col-xs-8 col-xs-offset-2"} >
 	            <h3>Categories</h3>
-	            <div className={"center-block"}>
-                    <button className={"btn btn-default"} onClick={this.handleShow} >
-		                {this.state.showAll ? "Show only top categories" : `Show all ${allCategories.length} categories` }
-	                </button>
-	            </div>
-	            <div>
-		            {this.renderCategory("All", categories, selectedCategory, changeHandler) }
-                    {this.state.allCategories.map((category) => this.renderCategory(category, categories, selectedCategory, changeHandler))}
-	            </div>
+	            {this.showButton(allCategories)}
+	            {this.showCategories(allCategories, categories, selectedCategory, changeHandler)}
             </div>
         )
     }
 
+    showCategories(allCategories, categories, selectedCategory, changeHandler){
+    	if (this.state.show === "None"){
+    		return ""
+	    } else {
+    		return (
+                <div>
+		            {this.renderCategory("All", categories, selectedCategory, changeHandler) }
+                    {this.state.allCategories.map((category) => this.renderCategory(category, categories, selectedCategory, changeHandler))}
+                </div>
+		    )
+	    }
+    }
+
     renderCategory (category, categories, selectedCategory, changeHandler) {
     	const count = categories[category] ? categories[category] : 0
-    	if (category === "All" || this.state.showAll || this.state.topCategories.includes(category)){
+	    const show = this.state.show === "All" || (this.state.show === "Top" && this.state.topCategories.includes(category))
+    	if (category === "All" || show ){
             return (
             	<div className={"col-md-4"}>
                     <label className="radio" key={category} >

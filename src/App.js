@@ -20,7 +20,7 @@ class App extends Component{
                 return response.json()
             })
             .then( (json) => {
-            	this.setState({loading: false, data: json})
+            	this.setState({loading: false, data: json, allData: json})
             });
     }
 
@@ -32,7 +32,16 @@ class App extends Component{
     }
 
     handleRangeChange = (range) => {
+    	this.filterData(range)
         this.setState({ range: range })
+    }
+
+    filterData(dateRange){
+	    const filteredMixes = this.state.allData.filter((mix) => {
+	    	const year = Number(mix.date.slice(0,4))
+	    	return dateRange.min <= year && year <= dateRange.max
+	    })
+		this.setState({data: filteredMixes})
     }
 
 	render(){

@@ -19,6 +19,7 @@ export default class RangeFilter extends Component {
 
         return (
             <form className={"col-xs-6 col-xs-offset-3"} action="">
+	            <h3>Years</h3>
                 <InputRange
                     maxValue={max}
                     minValue={min}

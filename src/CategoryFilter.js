@@ -16,17 +16,14 @@ export default class CategoryFilter extends Component {
 	    this.setState({minCount: minCount})
     }
 
-    selectAll = () => {
-    	const allCategories = Object.keys(this.state.categories)
-	    this.setState({selectedCategories: allCategories})
-    }
-
-    selectNone = () => {
-	    this.setState({selectedCategories: []})
-    }
-
     render() {
-
+    	const {
+    		categories,
+		    changeHandler,
+    		selectedCategories,
+    	    selectAllCategories,
+		    selectNoCategories
+	    } = this.props
 	    const categoryCount = Object.keys(this.state.categories).length
 
         return (
@@ -36,14 +33,14 @@ export default class CategoryFilter extends Component {
 		            <div className={"btn-group"} role="group">
 			            <button
 				            className={"btn btn-default"}
-				            onClick={this.selectAll}
-				            disabled={this.state.selectedCategories.length === categoryCount}
+				            onClick={selectAllCategories}
+				            disabled={selectedCategories.length === categoryCount}
 						>
 				             Select All
 			            </button>
 	                    <button className={"btn btn-default"}
-	                            onClick={this.selectNone}
-	                            disabled={this.state.selectedCategories.length === 0}>
+	                            onClick={selectNoCategories}
+	                            disabled={selectedCategories.length === 0}>
 				             Select None
 	                    </button>
                     <button className={"btn btn-default"} onClick={this.handleShow} >
@@ -54,24 +51,20 @@ export default class CategoryFilter extends Component {
 	            </div>
 
 	            <div>
-                    {this.renderCategories(this.state.categories, this.state.selectedCategories)}
+                    {categories.map((category) => this.renderCategory(category, selectedCategories, changeHandler))}
 	            </div>
             </div>
         )
     }
 
-    renderCategories(categories, selectedCategories){
-    	return categories.map((category) => this.renderCategory(category, selectedCategories))
-    }
-
-    renderCategory (category, selectedCategories) {
+    renderCategory (category, selectedCategories, changeHandler) {
     	if (category.count > this.state.minCount){
             return (
 				<label className="checkbox-inline" key={category.name} >
 					<input type="checkbox"
 					       value="{category.name}"
 					       checked={selectedCategories.includes(category.name)}
-					       onChange={(e) => console.log(e)}
+					       onChange={(e) => changeHandler(category)}
 					/>
 					{category.name} - {category.count}
                 </label>

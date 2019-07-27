@@ -23,7 +23,20 @@ class App extends Component{
                 return response.json()
             })
             .then( (json) => {
-            	this.setState({loading: false, data: json, allData: json})
+            	const categories = reduceCategories(json)
+            	const allCategories = categories.reduce((acc, e) => {
+		            	acc.push(e.name)
+			            return acc
+	            }, [])
+
+            	this.setState({
+		            loading: false,
+		            data: json,
+		            allData: json,
+		            allCategories: allCategories,
+		            categories: categories,
+		            selectedCategories: allCategories
+            	})
             });
     }
 
@@ -35,16 +48,46 @@ class App extends Component{
     }
 
     handleRangeChange = (range) => {
-    	this.filterData(range)
+    	this.filterData(range, this.state.selectedCategories)
         this.setState({ range: range })
     }
 
-    filterData(dateRange){
+    handleCategoryChange = (category) => {
+    	const selectedCategories = this.state.selectedCategories
+	    const index = selectedCategories.indexOf(category.name)
+    	if (index !== -1){
+    		selectedCategories.splice(index, 1);
+	    }else{
+    		selectedCategories.push(category.name)
+	    }
+    	this.filterData(this.state.range, selectedCategories)
+    }
+
+    selectAllCategories = () => {
+	    this.setState({selectedCategories: this.state.allCategories})
+	    this.filterData(this.state.range, this.state.allCategories)
+    }
+
+    selectNoCategories = () => {
+	    this.setState({selectedCategories: []})
+        this.filterData(this.state.range, [])
+    }
+
+    filterData(dateRange, selectedCategories){
 	    const filteredMixes = this.state.allData.filter((mix) => {
+
+	    	if (selectedCategories.length === 0){
+	    		return false
+		    }
+
+            const all = selectedCategories === this.state.allCategories
+
 	    	const year = Number(mix.date.slice(0,4))
-	    	return dateRange.min <= year && year <= dateRange.max
+	    	const inRange = dateRange.min <= year && year <= dateRange.max
+
+		    return inRange && (all || selectedCategories.every((e) => mix.categories.includes(e)))
 	    })
-		this.setState({data: filteredMixes})
+		this.setState({data: filteredMixes, categories:reduceCategories(filteredMixes)})
     }
 
 	render(){
@@ -60,11 +103,13 @@ class App extends Component{
 		    onChange={this.handleRangeChange}
 	    />
 
-        const categories = !this.state.loading && reduceCategories(this.state.data)
-		const categoryFilter = categories && <CategoryFilter
-			categories={categories}
+        const categoryFilter = !this.state.loading && <CategoryFilter
+			categories={this.state.categories}
 			minCount={5}
-			selectedCategories={Object.keys(categories)}
+			selectedCategories={this.state.selectedCategories}
+		    changeHandler={this.handleCategoryChange}
+		    selectAllCategories={this.selectAllCategories}
+		    selectNoCategories={this.selectNoCategories}
 		/>
 
 		return(

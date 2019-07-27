@@ -9,7 +9,8 @@ class App extends Component{
         super(props);
 
         this.state = {
-            loading: true
+            loading: true,
+	        range: {min: 1993, max: 2019}
         }
     }
 
@@ -29,16 +30,22 @@ class App extends Component{
             data: this.loadData()
         })
     }
+
+    handleRangeChange = (range) => {
+        this.setState({ range: range })
+    }
+
 	render(){
     	const loading = this.state.loading && <div>Data is loading</div>
+
     	const trackCounts = !this.state.loading && <TrackCounts mixes={this.state.data}/>
     	const mixCategories = !this.state.loading && <MixCategories mixes={this.state.data}/>
 
-    	const value = {"min": 1993, "max": 2019}
     	const rangeFilter = !this.state.loading && <RangeFilter
 		    min={1993}
 		    max={2019}
-		    value={value}
+		    value={this.state.range}
+		    onChange={this.handleRangeChange}
 	    />
 
 		return(

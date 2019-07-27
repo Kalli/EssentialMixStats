@@ -9,22 +9,21 @@ export default class RangeFilter extends Component {
         this.state = {value: props.value}
     }
 
-    handleChange(value){
-        this.setState({ value })
-    }
-
     render() {
         const {
             min,
             max,
+            value,
+	        onChange
         } = this.props
+
         return (
             <form className={"col-xs-6 col-xs-offset-3"} action="">
                 <InputRange
                     maxValue={max}
                     minValue={min}
-                    value={this.state.value}
-                    onChange={(value) => this.handleChange(value)}
+                    value={value}
+                    onChange={(value) => onChange(value)}
                  />
             </form>
         )

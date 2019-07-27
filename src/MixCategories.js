@@ -11,18 +11,15 @@ export default class MixCategories extends Component {
 	formatData(mixes){
 		const mixesByCategories = reduceCategories(mixes, ['Tracklist'])
 
-		const categories = Object.keys(mixesByCategories).reduce((acc, category) => {
-			if (mixesByCategories[category] >= 5) {
-				const link = "https://www.mixesdb.com/w/Special:Search?fulltext=Search&cat=Essential+Mix&search="+category
-				const count = mixesByCategories[category]
-				const toolTip = `<h4><a href="${link}" target="_blank">${category}</a> - ${count}</h4>`
-
-				acc.push([category, mixesByCategories[category], toolTip])
+		return mixesByCategories.reduce((acc, category) => {
+			if (category.count >= 5) {
+				const link = "https://www.mixesdb.com/w/Special:Search?fulltext=Search&cat=Essential+Mix&search="+category.name
+				const count = category.count
+				const toolTip = `<h4><a href="${link}" target="_blank">${category.name}</a> - ${count}</h4>`
+				acc.push([category.name, category.count, toolTip])
 			}
 			return acc
 		}, [])
-
-		return categories.sort((a, b)=> b[1] - a[1])
 	}
 
 	render(){

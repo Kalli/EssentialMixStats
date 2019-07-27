@@ -7,7 +7,7 @@ export function completeTracklist(mix){
 }
 
 export function reduceCategories(mixes, filters) {
-	return mixes.reduce((acc, mix) => {
+	const mixesByCategory = mixes.reduce((acc, mix) => {
 		if (!mix.duplicate){
 			mix.categories.forEach((category) => {
 				let include = true
@@ -21,4 +21,8 @@ export function reduceCategories(mixes, filters) {
 		}
 		return acc
 	}, {})
+	return Object.entries(mixesByCategory).reduce((acc, c) => {
+        acc.push({'name': c[0], 'count': c[1]})
+	    return acc
+    }, []).sort((a, b) => b.count - a.count)
 }

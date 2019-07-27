@@ -55,17 +55,11 @@ export default class CategoryFilter extends Component {
     }
 
     renderCategories(categories, selectedCategories){
-    	const categoryArray = Object.entries(categories).reduce((acc, c) => {
-    		acc.push({'name': c[0], 'count': c[1]})
-		    return acc
-	    }, []).sort((a, b) => b.count - a.count)
-
-    	return categoryArray.map((category) => this.renderCategory(category, selectedCategories))
+    	return categories.map((category) => this.renderCategory(category, selectedCategories))
     }
 
     renderCategory (category, selectedCategories) {
     	if (category.count > this.state.minCount){
-
             return (
 				<label className="checkbox-inline" key={category.name} >
 					<input type="checkbox"

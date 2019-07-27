@@ -1,8 +1,11 @@
 import React, { Component} from "react"
 
 import RangeFilter from "./RangeFilter"
+import CategoryFilter from "./CategoryFilter"
 import TrackCounts from "./TrackCounts"
 import MixCategories from "./MixCategories"
+
+import {reduceCategories} from "./lib"
 
 class App extends Component{
     constructor(props) {
@@ -57,6 +60,13 @@ class App extends Component{
 		    onChange={this.handleRangeChange}
 	    />
 
+        const categories = !this.state.loading && reduceCategories(this.state.data)
+		const categoryFilter = categories && <CategoryFilter
+			categories={categories}
+			minCount={5}
+			selectedCategories={Object.keys(categories)}
+		/>
+
 		return(
 			<>
 				<div className="row text-center">
@@ -65,11 +75,12 @@ class App extends Component{
 						Explore the statistics and history of the BBC Radio 1 Essential Mix.
 					</p>
 					{rangeFilter}
+					{categoryFilter}
 					{loading}
-					<div  className="center-block col-xs-12">
+					<div className="col-xs-12">
 							{trackCounts}
 					</div>
-					<div  className="center-block col-xs-12">
+					<div className="col-xs-12">
 							{mixCategories}
 					</div>
 				</div>

@@ -40,13 +40,12 @@ export default class CategoryFilter extends Component {
 		    	text = "Hide categories"
 	    }
 		return (
-		    <div className={"center-block"}>
+		    <div className={"center-block category-filter"}>
                 <button className={"btn btn-default"} onClick={this.handleShow} >
 	                {text}
                 </button>
             </div>
 		)
-
     }
 
     render() {
@@ -84,8 +83,8 @@ export default class CategoryFilter extends Component {
 	    const show = this.state.show === "All" || (this.state.show === "Top" && this.state.topCategories.includes(category))
     	if (category === "All" || show ){
             return (
-            	<div className={"col-md-4"}>
-                    <label className="radio" key={category} >
+            	<div className={"col-md-4 "} key={category}>
+                    <label className="radio" >
 						<input type="radio"
 						       value="{category}"
 						       checked={selectedCategory === category}

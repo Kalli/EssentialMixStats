@@ -212,6 +212,14 @@ def parse_tracks(mix_data):
         # remove leading timestamps
         processed_track= re.sub('^\[[\d|\?|:]+\]', '', processed_track).strip()
 
+        # remove leading numbers and periods
+        processed_track = re.sub('^\d+\.', '', processed_track).strip()
+
+        # remove leading superfluous characters
+        for remove in ["''", "* ", "+ "]:
+            if processed_track[0:2] == remove:
+                processed_track = processed_track[2:].strip()
+
         artist, track, label = 'unknown', 'unknown', 'unknown'
 
         # Non identified tracks will often contain just question marks
@@ -225,6 +233,11 @@ def parse_tracks(mix_data):
             segments = processed_track.split(' - ')
             if len(segments) > 1:
                 artist = segments[0].strip()
+                # remove featuring listings from artists
+                for feat in [' Feat.', ' Featuring']:
+                    if feat in artist:
+                        artist = artist.split(feat)[0]
+
                 track = segments[1].strip()
 
         parsed_tracks.append([artist, track, label])

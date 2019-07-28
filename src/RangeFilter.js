@@ -14,7 +14,8 @@ export default class RangeFilter extends Component {
             min,
             max,
             value,
-	        onChange
+	        onChange,
+	        onChangeComplete
         } = this.props
 
         return (
@@ -25,6 +26,7 @@ export default class RangeFilter extends Component {
                     minValue={min}
                     value={value}
                     onChange={(value) => onChange(value)}
+                    onChangeComplete={(value) => onChangeComplete(value)}
                  />
             </form>
         )

@@ -50,6 +50,10 @@ class App extends Component{
     }
 
     handleRangeChange = (range) => {
+        this.setState({ range: range })
+    }
+
+    handleRangeChangeComplete = (range) => {
     	this.filterData(range, this.state.selectedCategory)
         this.setState({ range: range })
     }
@@ -80,6 +84,7 @@ class App extends Component{
 		    max={2019}
 		    value={this.state.range}
 		    onChange={this.handleRangeChange}
+		    onChangeComplete={this.handleRangeChangeComplete}
 	    />
 
         const categoryFilter = !this.state.loading && <CategoryFilter

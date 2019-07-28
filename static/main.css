@@ -27,3 +27,6 @@
     height: 16px;
 }
 
+.track-count-tooltip ul{
+    text-align: left;
+}

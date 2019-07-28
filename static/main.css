@@ -10,7 +10,13 @@
 .track-statistics {
     font-size: 16px;
 }
-.track-statistics td:first-child { text-align: left }
+.track-statistics td:nth-child(2n) { text-align: left }
+.track-statistics .links {
+    text-align: left;
+}
+.track-statistics .tab {
+    text-transform: capitalize;
+}
 .track-statistics .links a {
     padding-right: .5em;
     color: inherit;

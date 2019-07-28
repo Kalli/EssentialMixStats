@@ -2,39 +2,72 @@ import React, { Component} from "react"
 import BootstrapTable from 'react-bootstrap-table-next'
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import {createMixLink} from './lib'
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import { faYoutube } from '@fortawesome/free-brands-svg-icons'
+
 
 export default class MostPlayedTracks extends Component {
 	constructor(props) {
 		super(props)
+		this.state = {active: "tracks"}
+	}
+
+	addOrAppend(counter, element, link){
+		if (element in counter){
+			counter[element]['count'] += 1
+			if (link in counter[element]['played_by']){
+				counter[element]['played_by'][link] += 1
+			}else{
+				counter[element]['played_by'][link] = 1
+			}
+		} else {
+			counter[element] = {
+				'count': 1,
+				'played_by': {}
+			}
+			counter[element]['played_by'][link] = 1
+		}
 	}
 
 	formatData(mixes){
-		return mixes.reduce((acc, mix) => {
+		const counters = mixes.reduce((acc, mix) => {
 			mix.tracklist.forEach((trackInfo) => {
+				const mixLink = createMixLink(mix)
 				const [artist, trackName, label] = trackInfo
 				const track = `${artist} - ${trackName}`
 				if (track !== "unknown - unknown" && track !== "Jon Gaiser - ?''"){
-					if (track in acc.tracks){
-							acc.tracks[track]['count'] += 1
-							acc.tracks[track]['played_by'].push(createMixLink(mix))
-					} else {
-						acc.tracks[track] = {
-							'count': 1,
-							'played_by': [createMixLink(mix)]
-						}
-					}
+					this.addOrAppend(acc.tracks, track, mixLink)
 				}
 				if (artist !== "unknown" && artist !== "''?" && artist !== "?"){
-					acc.artists[artist] = acc.artists[artist] ? acc.artists[artist]  + 1 : 1
+					this.addOrAppend(acc.artists, artist, mixLink)
 				}
 				if (label !== "" && label !== "unknown"){
-					acc.labels[label] = acc.labels[label] ? acc.labels[label]  + 1 : 1
+					this.addOrAppend(acc.labels, label, mixLink)
 				}
 			})
 			return acc
 		}, {"artists": {}, "tracks": {}, "labels": {}})
+
+		const allData = Object.keys(counters).reduce((acc, key) => {
+			acc[key] = []
+			Object.entries(counters[key]).forEach(function(e){
+				e[1]['name'] = e[0]
+				acc[key].push(e[1])
+			})
+			return acc
+		}, {})
+
+		return Object.keys(allData).reduce((acc, key) => {
+			acc[key] = allData[key].sort((a, b) => b['count'] - a['count']).slice(0, 250)
+			acc[key] = acc[key].map((e, index) => {
+				e['played_by'] = Object.entries(e['played_by']).reduce((links, link) => {
+					const l = link[0] + (link[1] > 1 ? ` (x ${link[1]})`: "")
+					links.push(l)
+					return links
+				}, [])
+				e['position'] = index+1
+				return e
+			})
+			return acc
+		}, {})
 	}
 
 	generateSearchLinks(searchTerm){
@@ -50,22 +83,32 @@ export default class MostPlayedTracks extends Component {
 		})
 	}
 
+	selectContent(tab){
+		this.setState({active: tab})
+	}
+
+	createTabs() {
+		const tabs = ['tracks', 'artists', 'labels']
+		return (
+			<ul className="nav nav-tabs nav-justified">
+				{tabs.map((tab)=>{
+					return (
+						<li key={tab} role="presentation" className={this.state.active === tab? "active": ""}>
+							<a onClick={e => this.selectContent(tab)} className={"tab"}>{tab}</a>
+						</li>
+					)
+				})}
+			</ul>
+		)
+	}
 
 	render(){
-		const data = this.formatData(this.props.mixes)
-		const tracks = Object.entries(data.tracks).reduce((acc, e) => {
-			e[1]['name'] = e[0]
-			acc.push(e[1])
-			return acc
-		}, []).sort((a, b) => b['count'] - a['count']).slice(0, 250)
-
-		const columns = [{
-			dataField: 'name',
-			text: 'Track Name'
-		}, {
-			dataField: 'count',
-			text: 'Times Played'
-		}]
+		const columns = [
+			{dataField: 'position', text: '#'},
+			{dataField: 'name', text: 'Name'},
+			{dataField: 'count', text: 'Times Played'}
+		]
+		const data = this.formatData(this.props.mixes)[this.state.active]
 
 		const expandRow = {
 			renderer: row => (
@@ -80,16 +123,23 @@ export default class MostPlayedTracks extends Component {
 						))}
 					</ul>
 				</div>
-			)
+			),
+			showExpandColumn: true,
+            expandColumnPosition: 'right'
 		}
 
-		return <BootstrapTable
-			keyField='name'
-			data={ tracks }
-			columns={ columns }
-			expandRow={expandRow}
-			striped={true}
-			pagination={ paginationFactory({sizePerPageList: [50]}) }
-		/>
+		return (
+		<>
+			{this.createTabs()}
+			<BootstrapTable
+				keyField='name'
+				data={ data }
+				columns={ columns }
+				expandRow={expandRow}
+				striped={true}
+				pagination={ paginationFactory({sizePerPageList: [50]}) }
+				tabIndexCell={true}
+			/>
+		</>)
 	}
 }

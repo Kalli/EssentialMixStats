@@ -2,7 +2,8 @@ import React, { Component} from "react"
 import BootstrapTable from 'react-bootstrap-table-next'
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import {createMixLink} from './lib'
-
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import { faYoutube } from '@fortawesome/free-brands-svg-icons'
 
 export default class MostPlayedTracks extends Component {
 	constructor(props) {
@@ -36,6 +37,20 @@ export default class MostPlayedTracks extends Component {
 		}, {"artists": {}, "tracks": {}, "labels": {}})
 	}
 
+	generateSearchLinks(searchTerm){
+		return [
+			["https://www.youtube.com/results?search_query=", "YouTube.png"],
+			["https://open.spotify.com/search/results/", "Spotify.png"],
+			["http://www.junodownload.com/search/?ref=bbis&q%5Ball%5D%5B%5D=", "JD.png"],
+			["https://www.discogs.com/search/?type=all&q=", "Discogs.png"],
+			["https://www.mixesdb.com/db/index.php?fulltext=Search&title=&search=", "Mixesdb.png"],
+		].map((site, index) => {
+			const link = site[0]+searchTerm
+			return (<a href={link} key={index} target="_blank"><img src={"/static/"+site[1]} alt={site[1].replace(".png", "")}/></a>)
+		})
+	}
+
+
 	render(){
 		const data = this.formatData(this.props.mixes)
 		const tracks = Object.entries(data.tracks).reduce((acc, e) => {
@@ -55,15 +70,18 @@ export default class MostPlayedTracks extends Component {
 		const expandRow = {
 			renderer: row => (
 				<div>
+					<div className={"links"}>
+						{this.generateSearchLinks(row.name)}
+					</div>
 					<h6 className={"text-left"}>Played By:</h6>
 					<ul className={"list-inline"}>
 						{Array.from(row['played_by']).sort().map((e, index) => (
-							<li className={"col-xs-3 text-left"} key={index} dangerouslySetInnerHTML={{__html: e}} />
+							<li className={"col-xs-4 text-left"} key={index} dangerouslySetInnerHTML={{__html: e}} />
 						))}
 					</ul>
 				</div>
 			)
-		};
+		}
 
 		return <BootstrapTable
 			keyField='name'

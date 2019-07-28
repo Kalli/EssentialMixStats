@@ -40,7 +40,7 @@ export default class CategoryFilter extends Component {
 		    	text = "Hide categories"
 	    }
 		return (
-		    <div className={"center-block category-filter"}>
+		    <div className={"center-block category-button"}>
                 <button className={"btn btn-default"} onClick={this.handleShow} >
 	                {text}
                 </button>
@@ -57,8 +57,8 @@ export default class CategoryFilter extends Component {
 	    } = this.props
 
         return (
-            <div className={"col-xs-8 col-xs-offset-2"} >
-	            <h3>Categories</h3>
+            <div className={"col-xs-12 category-filter"} >
+	            <h4>Categories</h4>
 	            {this.showButton(allCategories)}
 	            {this.showCategories(allCategories, categories, selectedCategory, changeHandler)}
             </div>
@@ -70,7 +70,7 @@ export default class CategoryFilter extends Component {
     		return ""
 	    } else {
     		return (
-                <div>
+                <div className={"categories"}>
 		            {this.renderCategory("All", categories, selectedCategory, changeHandler) }
                     {this.state.allCategories.map((category) => this.renderCategory(category, categories, selectedCategory, changeHandler))}
                 </div>
@@ -83,8 +83,8 @@ export default class CategoryFilter extends Component {
 	    const show = this.state.show === "All" || (this.state.show === "Top" && this.state.topCategories.includes(category))
     	if (category === "All" || show ){
             return (
-            	<div className={"col-md-4 "} key={category}>
-                    <label className="radio" >
+            	<div className={"col-xs-12"} key={category}>
+                    <label className="radio small" >
 						<input type="radio"
 						       value="{category}"
 						       checked={selectedCategory === category}

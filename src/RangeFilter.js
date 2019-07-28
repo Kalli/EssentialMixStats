@@ -19,8 +19,8 @@ export default class RangeFilter extends Component {
         } = this.props
 
         return (
-            <form className={"col-xs-6 col-xs-offset-3"} action="">
-	            <h3>Years</h3>
+            <div className={"col-xs-12"} >
+	            <h4>Years</h4>
                 <InputRange
                     maxValue={max}
                     minValue={min}
@@ -28,7 +28,7 @@ export default class RangeFilter extends Component {
                     onChange={(value) => onChange(value)}
                     onChangeComplete={(value) => onChangeComplete(value)}
                  />
-            </form>
+            </div>
         )
     }
 }

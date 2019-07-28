@@ -2,6 +2,37 @@
     height:200px;
 }
 
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+nav#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    padding-left: 1em;
+    left: 0;
+    background-color: #f7f7f7;
+}
+
+nav#sidebar h4{
+    margin-bottom: 1em;
+    margin-top: 1em;
+
+}
+
+nav#sidebar ul{
+    list-style: none;
+    padding-left: 0;
+}
+
+.category-button button{
+    width: 100%;
+}
 
 .category-filter{
     padding-bottom: 2em;

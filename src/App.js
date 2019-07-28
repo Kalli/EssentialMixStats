@@ -96,26 +96,56 @@ class App extends Component{
 		/>
 
 		return(
-			<>
-				<div className="row text-center">
-					<h1 className="text-center">Essential Mix stats</h1>
-					<p className="lead">
-						Explore the statistics and history of the BBC Radio 1 Essential Mix.
-					</p>
-					{rangeFilter}
-					{categoryFilter}
-					{loading}
-					<div className="col-xs-8 col-xs-offset-2 track-statistics">
+			<div className="wrapper">
+
+				<nav id="sidebar">
+					<div className="sidebar-header col-xs-12">
+						<h3>Essential Mix Stats</h3>
+						<ul className={"lead"}>
+							<li>
+								<a href="#intro">Intro</a>
+							</li>
+							<li>
+								<a href="#most-played">Most Played Tracks</a>
+							</li>
+							<li>
+								<a href="#track-counts">Track Counts</a>
+							</li>
+							<li>
+								<a href="#mix-categories">Categories and Genres</a>
+							</li>
+						</ul>
+						<h3>Controls</h3>
+						<p className={"small"}>
+							Filter based on categories or year ranges. The charts update automatically.
+						</p>
+						{rangeFilter}
+						{categoryFilter}
+					</div>
+				</nav>
+
+
+				<div id="content" className="row text-center">
+					<div id="intro">
+						<h1 className="text-center">Essential Mix statistics</h1>
+						<p className="lead">
+							Explore the statistics and history of the BBC Radio 1 Essential Mix.
+						</p>
+						<p>Some words</p>
+
+						{loading}
+					</div>
+					<div id={"most-played"} className="col-xs-8 col-xs-offset-2 track-statistics">
 						{mostPlayedTracks}
 					</div>
-					<div className="col-xs-12">
+					<div id={"track-counts"} className="col-xs-12">
 						{trackCounts}
 					</div>
-					<div className="col-xs-12">
+					<div id={"mix-categories"} className="col-xs-12">
 						{mixCategories}
 					</div>
 				</div>
-			</>
+			</div>
 		)
 	}
 }

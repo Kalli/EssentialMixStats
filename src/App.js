@@ -4,6 +4,7 @@ import RangeFilter from "./RangeFilter"
 import CategoryFilter from "./CategoryFilter"
 import TrackCounts from "./TrackCounts"
 import MixCategories from "./MixCategories"
+import MostPlayedTracks from "./MostPlayedTracks"
 
 import {categoryCounts} from "./lib"
 
@@ -72,6 +73,7 @@ class App extends Component{
 
     	const trackCounts = !this.state.loading && <TrackCounts mixes={this.state.data}/>
     	const mixCategories = !this.state.loading && <MixCategories mixes={this.state.data}/>
+    	const mostPlayedTracks = !this.state.loading && <MostPlayedTracks mixes={this.state.data}/>
 
     	const rangeFilter = !this.state.loading && <RangeFilter
 		    min={1993}
@@ -98,6 +100,9 @@ class App extends Component{
 					{rangeFilter}
 					{categoryFilter}
 					{loading}
+					<div className="col-xs-12">
+							{mostPlayedTracks}
+					</div>
 					<div className="col-xs-12">
 							{trackCounts}
 					</div>

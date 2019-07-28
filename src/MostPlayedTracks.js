@@ -32,42 +32,44 @@ export default class MostPlayedTracks extends Component {
 			mix.tracklist.forEach((trackInfo) => {
 				const mixLink = createMixLink(mix)
 				const [artist, trackName, label] = trackInfo
-				const track = `${artist} - ${trackName}`
-				if (track !== "unknown - unknown" && track !== "Jon Gaiser - ?''"){
-					this.addOrAppend(acc.tracks, track, mixLink)
-				}
-				if (artist !== "unknown" && artist !== "''?" && artist !== "?"){
-					this.addOrAppend(acc.artists, artist, mixLink)
-				}
-				if (label !== "" && label !== "unknown"){
-					this.addOrAppend(acc.labels, label, mixLink)
-				}
-			})
-			return acc
-		}, {"artists": {}, "tracks": {}, "labels": {}})
 
-		const allData = Object.keys(counters).reduce((acc, key) => {
-			acc[key] = []
-			Object.entries(counters[key]).forEach(function(e){
-				e[1]['name'] = e[0]
-				acc[key].push(e[1])
+				switch (this.state.active) {
+					case "tracks" :
+						const track = `${artist} - ${trackName}`
+						if (track !== "unknown - unknown" && track !== "Jon Gaiser - ?''"){
+							this.addOrAppend(acc, track, mixLink)
+						}
+						break
+					case "artists" :
+						if (artist !== "unknown" && artist !== "''?" && artist !== "?"){
+							this.addOrAppend(acc, artist, mixLink)
+						}
+						break
+					case "labels":
+						if (label !== "" && label !== "unknown"){
+							this.addOrAppend(acc, label, mixLink)
+						}
+						break
+				}
 			})
 			return acc
 		}, {})
 
-		return Object.keys(allData).reduce((acc, key) => {
-			acc[key] = allData[key].sort((a, b) => b['count'] - a['count']).slice(0, 250)
-			acc[key] = acc[key].map((e, index) => {
-				e['played_by'] = Object.entries(e['played_by']).reduce((links, link) => {
-					const l = link[0] + (link[1] > 1 ? ` (x ${link[1]})`: "")
-					links.push(l)
-					return links
-				}, [])
-				e['position'] = index+1
-				return e
-			})
+		const allData = Object.entries(counters).reduce(function(acc, e){
+			e[1]['name'] = e[0]
+			acc.push(e[1])
 			return acc
-		}, {})
+		}, [])
+
+		return allData.sort((a, b) => b['count'] - a['count']).slice(0, 250).map((e, index) => {
+			e['played_by'] = Object.entries(e['played_by']).reduce((links, link) => {
+				const l = link[0] + (link[1] > 1 ? ` (x ${link[1]})`: "")
+				links.push(l)
+				return links
+			}, [])
+			e['position'] = index+1
+			return e
+		})
 	}
 
 	generateSearchLinks(searchTerm){
@@ -108,7 +110,6 @@ export default class MostPlayedTracks extends Component {
 			{dataField: 'name', text: 'Name'},
 			{dataField: 'count', text: 'Times Played'}
 		]
-		const data = this.formatData(this.props.mixes)[this.state.active]
 
 		const expandRow = {
 			renderer: row => (
@@ -133,7 +134,7 @@ export default class MostPlayedTracks extends Component {
 			{this.createTabs()}
 			<BootstrapTable
 				keyField='name'
-				data={ data }
+				data={ this.formatData(this.props.mixes) }
 				columns={ columns }
 				expandRow={expandRow}
 				striped={true}

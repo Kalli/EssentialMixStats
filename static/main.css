@@ -6,3 +6,5 @@
 .category-filter{
     padding-bottom: 2em;
 }
+
+.track-statistics td:first-child { text-align: left }

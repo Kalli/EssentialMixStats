@@ -100,14 +100,14 @@ class App extends Component{
 					{rangeFilter}
 					{categoryFilter}
 					{loading}
-					<div className="col-xs-12">
-							{mostPlayedTracks}
+					<div className="col-xs-8 col-xs-offset-2 track-statistics">
+						{mostPlayedTracks}
 					</div>
 					<div className="col-xs-12">
-							{trackCounts}
+						{trackCounts}
 					</div>
 					<div className="col-xs-12">
-							{mixCategories}
+						{mixCategories}
 					</div>
 				</div>
 			</>

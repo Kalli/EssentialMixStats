@@ -62,6 +62,10 @@ nav#sidebar ul{
     text-align: left;
 }
 
+.track-count-controls{
+    padding-bottom: 1em;
+}
+
 .introduction{
     text-align: left;
 }

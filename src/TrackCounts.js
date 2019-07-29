@@ -89,7 +89,7 @@ export default class TrackCounts extends Component {
 					]}
 					options={{
 						title: 'Number of Tracks per Essential Mix by Year',
-						chartArea: { width: '80%' },
+						chartArea: {'width': '80%', 'height': '80%'},
 						hAxis: {
 							title: 'Year',
 						},
@@ -97,11 +97,11 @@ export default class TrackCounts extends Component {
 							title: 'Tracks per mix',
 						},
 						tooltip: {isHtml: true, trigger: 'selection'},
-						legend: 'none',
+                        legend: {position: 'none'},
 					}}
 				/>
-				<div className="pull-left">
-	                <label className="checkbox" >
+				<div className="track-count-controls text-center">
+	                <label className="checkbox-inline" >
 						<input type="checkbox"
 						       value="hideIncomplete"
 						       checked={this.state.hideIncomplete}
@@ -109,7 +109,7 @@ export default class TrackCounts extends Component {
 						/>
 						Disregard incomplete tracklists
 	                </label>
-					<label className="checkbox" >
+					<label className="checkbox-inline" >
 						<input type="checkbox"
 						       value="hideTwoHours"
 						       checked={this.state.twoHours}
@@ -118,7 +118,6 @@ export default class TrackCounts extends Component {
 						Limit to two hour long mixes
 	                </label>
 				</div>
-
 			</>
 		)
 	}

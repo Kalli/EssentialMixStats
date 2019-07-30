@@ -189,7 +189,7 @@ class App extends Component{
 							</p>
 						</div>
 					</div>
-					<div className={"introduction col-xs-12"}>
+					<div className={"col-xs-12"}>
 						{trackCounts}
 					</div>
 					<div className="col-xs-12">
@@ -220,9 +220,9 @@ class App extends Component{
 							</p>
 						</div>
 					</div>
-					<div id={"most-played"} className="col-xs-8 col-xs-offset-2 track-statistics">
+					<div id={"most-played"} className="col-xs-12 track-statistics">
 						<h2>Most Played Tracks, Artists and Genres </h2>
-						<div className={"text-left"}>
+						<div className={"text-left col-xs-8 col-xs-offset-2 text-left"}>
 							<p>
 								In the tables below you can see the most played tracks, artists and labels in the
 								history of the Essential Mix. You'll find the top 250 most played from each of these
@@ -231,21 +231,31 @@ class App extends Component{
 							</p>
 							<p>
 								For tracks. Donna Summer's disco classic <i>I Feel Love</i> and the Underworld stable
-								<i>Born Slippy</i> come in at the top with 15 plays each. And after that its one classic
+								<i> Born Slippy</i> come in at the top with 15 plays each and after that its one classic
 								after the other. Older tracks naturally appear more frequently than newer tracks
-								(having had more years to have been played) out. Interesting to see Donna Summer top
+								(having had more years to have been played). Interesting to see Donna Summer top
 								the list as she is one of only a very few women on there, dance music is sadly a very
 								male dominated scene.
 							</p>
-							<p>
-								Underworld tops the artist top list as well, but as Daft Punk come in a close second.
-								The list is understandably a bit UK centric. On the label side the almighty
-								<i> White Label</i> comes out on top.
-							</p>
 						</div>
 						{mostPlayedTracks}
+						<div className={"text-left col-xs-8 col-xs-offset-2 text-left"}>
+							<p>
+								Underworld tops the artist top list as well, but Daft Punk come in a close second.
+								The list is understandably a bit UK centric. On the label side the almighty
+								<i> White Label</i> comes out on top, <i>Unreleased</i> and <i>Acetate</i> get a fair
+								few mentions as well. Otherwise the top places are taken up by some of the bigger
+								more established labels in the scene, with <i>FFRR</i> taking first place by quite a
+								margin.
+							</p>
+							<p>
+								That gives us a bit of insight into what has been played on the Essential Mix and leads
+								us naturally into the question: <i>who's played there</i>?
+							</p>
+						</div>
 					</div>
 					<div id={"dj-counts"} className="col-xs-12">
+						<h2>Which DJs?</h2>
 						<div className={"text-left col-xs-8 col-xs-offset-2 text-left"}>
 							<p>
 								I fetched data for 1344 mixes (discounting some duplicates) on which 889 artists have

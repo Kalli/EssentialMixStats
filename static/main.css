@@ -38,9 +38,21 @@ nav#sidebar ul{
     padding-bottom: 2em;
 }
 
+.categories {
+    overflow-y: auto;
+    max-height: 400px;
+    display:inline-block;
+    padding-left: 20px;
+}
+
+.tracks-table{
+    padding-top: 1em;
+}
+
 .track-statistics table {
     font-size: 16px;
 }
+.track-statistics th { text-align: center;}
 .track-statistics td:nth-child(2n) { text-align: left }
 .track-statistics .links {
     text-align: left;

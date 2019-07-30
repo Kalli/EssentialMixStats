@@ -36,7 +36,7 @@ export default class MostPlayedTracks extends Component {
 				switch (this.state.active) {
 					case "tracks" :
 						const track = `${artist} - ${trackName}`
-						if (track !== "unknown - unknown" && track !== "Jon Gaiser - ?''"){
+						if (!["unknown - unknown", "Jon Gaiser - ?''", "? - Untitled''"].includes(track)){
 							this.addOrAppend(acc, track, mixLink)
 						}
 						break
@@ -130,7 +130,7 @@ export default class MostPlayedTracks extends Component {
 		}
 
 		return (
-		<>
+		<div className={"tracks-table col-xs-10 col-xs-offset-1"}>
 			{this.createTabs()}
 			<BootstrapTable
 				keyField='name'
@@ -141,6 +141,6 @@ export default class MostPlayedTracks extends Component {
 				pagination={ paginationFactory({sizePerPageList: [50]}) }
 				tabIndexCell={true}
 			/>
-		</>)
+		</div>)
 	}
 }

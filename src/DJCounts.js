@@ -76,31 +76,35 @@ export default class DJCounts extends Component {
 	render(){
 		const mixes = this.formatData(this.props.mixes)
 
-		return 	<Chart
-			height={900}
-			className={"center-block"}
-			chartType="ColumnChart"
-			loader={<div>Loading Chart</div>}
-			data={[
-				[
-					{id: 'Artist', label: 'Artist', type: 'string'},
-					{id: 'count', label: 'Number of Essential Mix Appearances', type: 'number'},
-					{type: 'string', role: 'tooltip', 'p': {'html': true}},
-				],
-				...mixes
-			]}
-			options={{
-				title: 'Number of appearances',
-				chartArea: { width: '80%' },
-				hAxis: {
-					title: 'Number of DJs',
-				},
-				vAxis: {
-					title: 'Number of Appearances',
-				},
-				tooltip: {isHtml: true, trigger: 'selection'},
-				legend: 'none',
-			}}
-		/>
+		return 	(
+			<div className={"col-xs-12"}>
+				<Chart
+					height={900}
+					className={"center-block"}
+					chartType="ColumnChart"
+					loader={<div>Loading Chart</div>}
+					data={[
+						[
+							{id: 'Artist', label: 'Artist', type: 'string'},
+							{id: 'count', label: 'Number of Essential Mix Appearances', type: 'number'},
+							{type: 'string', role: 'tooltip', 'p': {'html': true}},
+						],
+						...mixes
+					]}
+					options={{
+						title: 'Number of appearances',
+						chartArea: {'width': '80%', 'height': '80%'},
+						hAxis: {
+							title: 'Number of Appearances',
+						},
+						vAxis: {
+							title: 'Number of DJs',
+						},
+						tooltip: {isHtml: true, trigger: 'selection'},
+						legend: 'none',
+					}}
+				/>
+			</div>
+		)
 	}
 }

@@ -3,6 +3,7 @@ import React, { Component} from "react"
 import RangeFilter from "./RangeFilter"
 import CategoryFilter from "./CategoryFilter"
 import TrackCounts from "./TrackCounts"
+import DJCounts from "./DJCounts"
 import MixCategories from "./MixCategories"
 import MostPlayedTracks from "./MostPlayedTracks"
 
@@ -76,6 +77,7 @@ class App extends Component{
     	const loading = this.state.loading && <div>Data is loading</div>
 
     	const trackCounts = !this.state.loading && <TrackCounts mixes={this.state.data}/>
+    	const djCounts = !this.state.loading && <DJCounts mixes={this.state.data}/>
     	const mixCategories = !this.state.loading && <MixCategories mixes={this.state.data}/>
     	const mostPlayedTracks = !this.state.loading && <MostPlayedTracks mixes={this.state.data}/>
 
@@ -110,6 +112,9 @@ class App extends Component{
 							</li>
 							<li>
 								<a href="#most-played">Most Played Tracks</a>
+							</li>
+							<li>
+								<a href="#dj-counts">Which DJs?</a>
 							</li>
 							<li>
 								<a href="#mix-categories">Categories and Genres</a>
@@ -188,7 +193,7 @@ class App extends Component{
 						{trackCounts}
 					</div>
 					<div className="col-xs-12">
-						<div className={" col-xs-8 col-xs-offset-2 text-left"}>
+						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
 							<p>
 								Loking at the graph I feel supported in my hunch that technology has resulted in djs
 								mixing from one song to the next one faster. This type of chart is called a candlestick chart,
@@ -235,12 +240,31 @@ class App extends Component{
 							<p>
 								Underworld tops the artist top list as well, but as Daft Punk come in a close second.
 								The list is understandably a bit UK centric. On the label side the almighty
-								<i>White Label</i> comes out on top.
+								<i> White Label</i> comes out on top.
 							</p>
 						</div>
 						{mostPlayedTracks}
 					</div>
-
+					<div id={"dj-counts"} className="col-xs-12">
+						<div className={"text-left col-xs-8 col-xs-offset-2 text-left"}>
+							<p>
+								I fetched data for 1344 mixes (discounting some duplicates) on which 889 artists have
+								played. Of those 658 have played the Essential Mix once, while around 130 have featured
+								twice (many of those are the winners of the Essential Mix of the year, which gets
+								replayed as the last episode every year).
+							</p>
+						</div>
+						{djCounts}
+						<div className={"text-left col-xs-8 col-xs-offset-2 text-left"}>
+							<p>
+								In this chart you can see which djs have had multiple occurrences and how they are
+								divided. Obviously Pete Tong, the host of the show is a bit of an outlier, in the
+								MixesDB data he gets credited as an artist around 80 times. Also, again, older artists
+								or those with a longer career are likely to have made more appearances. So you have a lot
+								of the older acid-house era british djs racking up the most appearances.
+							</p>
+						</div>
+					</div>
 					<div id={"mix-categories"} className="col-xs-12">
 						{mixCategories}
 					</div>

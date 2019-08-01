@@ -98,7 +98,8 @@ export default class MixCategories extends Component {
 	render(){
 		const categoriesByYear = this.getCategoriesByYears(this.props.mixes, this.state.selectedCategories)
 		return 	(
-			<>
+			<div className={"col-xs-12"}>
+				<h2>Mixes by Categories</h2>
 				<Chart
 					height={900}
 					className={"center-block"}
@@ -154,7 +155,7 @@ export default class MixCategories extends Component {
 						}}
 					/>
 				</div>
-			</>
+			</div>
 		)
 	}
 }

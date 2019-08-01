@@ -279,7 +279,32 @@ class App extends Component{
 						</div>
 					</div>
 					<div id={"mix-categories"} className="col-xs-12">
+						<h2>Categories and Genres</h2>
+						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
+							<p>
+								The last bit of data to look into is the categories. I've filtered out the ones related to
+								the tracklists or the artists and that leaves us with genre information. Now this always
+								going to be subjective. Where is the line between techno, tech house and house? Ask ten
+								nerds and you'll get ten answers. But regardless, its interesting to see how genres are
+								born, evolve and (in some cases) die.
+							</p>
+							<p>
+								In the first chart, you can see that house reigns supreme in the Essential Mix. There are
+								444 mixes categorized as house, almost two times more than the runner up, tech house.
+								After that is the other big 4x4 genres, but then there's quite a drop off before the more
+								breakbeat oriented genres show up.
+							</p>
+						</div>
 						{mixCategories}
+						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
+							<p>
+								In the second chart you can select categories to see how they are spread out through
+								the years. I found clicking around here to be quite the history lesson. Its interesting
+								to see how genres like minimal and dubstep spike and die down and how you can see trends
+								with the rise and fall of trance in the late 90s / early 00s and the resurgence of electro
+								in the last couple of years, to mention a few examples.
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>

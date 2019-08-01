@@ -370,6 +370,7 @@ def clean_data(data):
             value['tracklist'] = value['processed_tracks']
             del(value['processed_tracks'])
             del(value['tracks'])
+            del(value['venue'])
             value['url'] = key
 
             processed_data.append(value)

@@ -78,10 +78,6 @@ nav#sidebar ul{
     padding-bottom: 1em;
 }
 
-.introduction{
-    text-align: left;
-}
-
 .dj-counts-tooltip ul{
     max-height: 400px;
     min-height: 0;

@@ -137,7 +137,7 @@ class App extends Component{
 						<p className="lead">
 							Explore the statistics and history of the BBC Radio 1 Essential Mix.
 						</p>
-						<div className={"introduction col-xs-8 col-xs-offset-2"}>
+						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
 							<p>
 								The BBC Radio 1 <a href="https://www.bbc.co.uk/programmes/b006wkfp" target="blank">
 								Essential Mix</a> is an institution within dance music. Running since 1993 it has
@@ -227,7 +227,7 @@ class App extends Component{
 					</div>
 					<div id={"most-played"} className="col-xs-12 track-statistics">
 						<h2>Most Played Tracks, Artists and Genres </h2>
-						<div className={"text-left col-xs-8 col-xs-offset-2 text-left"}>
+						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
 							<p>
 								In the tables below you can see the most played tracks, artists and labels in the
 								history of the Essential Mix. You'll find the top 250 most played from each of these
@@ -244,7 +244,7 @@ class App extends Component{
 							</p>
 						</div>
 						{mostPlayedTracks}
-						<div className={"text-left col-xs-8 col-xs-offset-2 text-left"}>
+						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
 							<p>
 								Underworld tops the artist top list as well, but Daft Punk come in a close second.
 								The list is understandably a bit UK centric. On the label side the almighty
@@ -261,7 +261,7 @@ class App extends Component{
 					</div>
 					<div id={"dj-counts"} className="col-xs-12">
 						<h2>Which DJs?</h2>
-						<div className={"text-left col-xs-8 col-xs-offset-2 text-left"}>
+						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
 							<p>
 								I fetched data for 1344 mixes (discounting some duplicates) on which 889 artists have
 								played. Of those 658 have played the Essential Mix once, while around 130 have featured
@@ -270,7 +270,7 @@ class App extends Component{
 							</p>
 						</div>
 						{djCounts}
-						<div className={"text-left col-xs-8 col-xs-offset-2 text-left"}>
+						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
 							<p>
 								In this chart you can see which djs have had multiple occurrences and how they are
 								divided (click on each column to see which djs it includes). Obviously Pete Tong, the

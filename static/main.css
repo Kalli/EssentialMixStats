@@ -1,64 +1,89 @@
-section.range-slider {
-    position: relative;
-    width: 400px;
-    height: 35px;
-    text-align: center;
-}
-
-section.range-slider input {
-    pointer-events: none;
-    position: absolute;
-    overflow: hidden;
-    left: 0;
-    top: 20px;
-    width: 400px;
-    outline: none;
-    height: 18px;
-    margin: 15px;
-}
-
 .main{
     height:200px;
 }
 
-section.range-slider input::-webkit-slider-thumb {
-    pointer-events: all;
-    position: relative;
-    z-index: 1;
-    outline: 0;
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
 }
 
-section.range-slider input::-moz-range-thumb {
-    pointer-events: all;
-    position: relative;
-    z-index: 10;
-    -moz-appearance: none;
-    width: 9px;
+nav#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    padding-left: 1em;
+    left: 0;
+    background-color: #f7f7f7;
 }
 
-section.range-slider input::-moz-range-track {
-    position: relative;
-    z-index: -1;
-    background-color: rgba(0, 0, 0, 1);
-    border: 0;
-}
-section.range-slider input:last-of-type::-moz-range-track {
-    -moz-appearance: none;
-    background: none transparent;
-    border: 0;
-}
-  section.range-slider input[type=range]::-moz-focus-outer {
-  border: 0;
+nav#sidebar h4{
+    margin-bottom: 1em;
+    margin-top: 1em;
+
 }
 
-.treemap-tooltip{
-    background: #FFF;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #000;
+nav#sidebar ul{
+    list-style: none;
+    padding-left: 0;
 }
 
-.range-description{
-    font-size: medium;
-    padding: 10px;
+.category-button button{
+    width: 100%;
+}
+
+.category-filter{
+    padding-bottom: 2em;
+}
+
+.categories {
+    overflow-y: auto;
+    max-height: 400px;
+    display:inline-block;
+    padding-left: 20px;
+}
+
+.tracks-table{
+    padding-top: 1em;
+}
+
+.track-statistics table {
+    font-size: 16px;
+}
+.track-statistics th { text-align: center;}
+.track-statistics td:nth-child(2n) { text-align: left }
+.track-statistics .links {
+    text-align: left;
+}
+.track-statistics .tab {
+    text-transform: capitalize;
+}
+.track-statistics .links a {
+    padding-right: .5em;
+    color: inherit;
+}
+
+.track-statistics .links img {
+    width: 16px;
+    height: 16px;
+}
+
+.track-count-tooltip ul{
+    text-align: left;
+}
+
+.track-count-controls{
+    padding-bottom: 1em;
+}
+
+.dj-counts-tooltip ul{
+    max-height: 400px;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.categories-year-chart {
+    padding-bottom: 1em;
 }

@@ -212,6 +212,14 @@ def parse_tracks(mix_data):
         # remove leading timestamps
         processed_track= re.sub('^\[[\d|\?|:]+\]', '', processed_track).strip()
 
+        # remove leading numbers and periods
+        processed_track = re.sub('^\d+\.', '', processed_track).strip()
+
+        # remove leading superfluous characters
+        for remove in ["''", "* ", "+ "]:
+            if processed_track[0:2] == remove:
+                processed_track = processed_track[2:].strip()
+
         artist, track, label = 'unknown', 'unknown', 'unknown'
 
         # Non identified tracks will often contain just question marks
@@ -225,9 +233,14 @@ def parse_tracks(mix_data):
             segments = processed_track.split(' - ')
             if len(segments) > 1:
                 artist = segments[0].strip()
+                # remove featuring listings from artists
+                for feat in [' Feat.', ' Featuring']:
+                    if feat in artist:
+                        artist = artist.split(feat)[0]
+
                 track = segments[1].strip()
 
-        parsed_tracks.append({'artist': artist, 'track': track, 'label': label})
+        parsed_tracks.append([artist, track, label])
 
     fully_parsed = len(parsed_tracks) == len(tracks)
 
@@ -322,6 +335,9 @@ artist_categories = [
     "Eric Prydz"
 ]
 
+artists = []
+tracks = []
+labels = []
 
 def clean_data(data):
     """
@@ -354,6 +370,7 @@ def clean_data(data):
             value['tracklist'] = value['processed_tracks']
             del(value['processed_tracks'])
             del(value['tracks'])
+            del(value['venue'])
             value['url'] = key
 
             processed_data.append(value)

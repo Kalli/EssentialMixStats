@@ -131,7 +131,7 @@ export default class MixCategories extends Component {
 					<h4>Select categories: </h4>
 					{this.selectCategories(this.state.allCategories)}
 				</div>
-				<div className={"col-xs-10"}>
+				<div className={"categories-year-chart col-xs-10"}>
 					<Chart
 						height={700}
 						className={"center-block"}

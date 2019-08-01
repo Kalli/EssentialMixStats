@@ -79,7 +79,7 @@ export default class DJCounts extends Component {
 		return 	(
 			<div className={"col-xs-12"}>
 				<Chart
-					height={900}
+					height={700}
 					className={"center-block"}
 					chartType="ColumnChart"
 					loader={<div>Loading Chart</div>}

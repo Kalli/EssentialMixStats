@@ -83,3 +83,7 @@ nav#sidebar ul{
     min-height: 0;
     overflow-y: auto;
 }
+
+.categories-year-chart {
+    padding-bottom: 1em;
+}

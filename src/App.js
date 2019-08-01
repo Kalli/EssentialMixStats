@@ -119,6 +119,9 @@ class App extends Component{
 							<li>
 								<a href="#mix-categories">Categories and Genres</a>
 							</li>
+							<li>
+								<a href="#outro">Outro</a>
+							</li>
 						</ul>
 						<h3>Controls</h3>
 						<p className={"small"}>
@@ -303,6 +306,18 @@ class App extends Component{
 								to see how genres like minimal and dubstep spike and die down and how you can see trends
 								with the rise and fall of trance in the late 90s / early 00s and the resurgence of electro
 								in the last couple of years, to mention a few examples.
+							</p>
+						</div>
+					</div>
+					<div id={"outro"} className="col-xs-12">
+						<h2>Outro</h2>
+						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
+							<p>
+								I hope you enjoyed this statistical perspective into the history of the Essential Mix.
+								Again the code and the data can be found on <a href="https://github.com/Kalli/EssentialMixStats">Github</a>.
+								If you see any bugs or inconsistencies in the data you can let me know on
+								<a href="http://twitter.com/karltryggvason">@karltryggvason</a> on Twitter or send me an
+								email <a href="mailto:ktryggvason@gmail.com">ktryggvason@gmail.com</a>.
 							</p>
 						</div>
 					</div>

@@ -145,7 +145,9 @@ class App extends Component{
 								Using the crowdsourced tracklist website <a href="https://www.mixesdb.com/">Mixesdb </a>
 								I've gathered information about the performers, artists, tracklists and genres from more than
 								1400 editions of the Essential Mix. Look below for some insight into the history, evolution
-								and trends of the last 23 years in dance music.
+								and trends of the last 23 years in dance music. Note that on most of the charts you can
+								click the graphs to learn more about them and in the left hand side there are filters
+								for categories and date ranges.
 							</p>
 							<p>
 								There are some of caveats. All of this information is parsed from incomplete user entered
@@ -268,7 +270,8 @@ class App extends Component{
 						<div className={"text-left col-xs-8 col-xs-offset-2 text-left"}>
 							<p>
 								In this chart you can see which djs have had multiple occurrences and how they are
-								divided. Obviously Pete Tong, the host of the show is a bit of an outlier, in the
+								divided (click on each column to see which djs it includes). Obviously Pete Tong, the
+								host of the show is a bit of an outlier, in the
 								MixesDB data he gets credited as an artist around 80 times. Also, again, older artists
 								or those with a longer career are likely to have made more appearances. So you have a lot
 								of the older acid-house era british djs racking up the most appearances.

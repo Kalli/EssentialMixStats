@@ -77,10 +77,10 @@ export default class MixCategories extends Component {
 
 	selectCategories(categories){
 		return (
-			<div>
+			<div className={"text-left"}>
 				{categories.map((c) => {
 					return (
-						<label className={"checkbox-inline"} key={c}>
+						<label className={"checkbox"} key={c}>
 							<input
 								type={"checkbox"}
 								checked={this.state.selectedCategories.includes(c)}
@@ -125,28 +125,35 @@ export default class MixCategories extends Component {
 						legend: 'none',
 					}}
 				/>
-				{this.selectCategories(this.state.allCategories)}
-				<Chart
-					height={900}
-					className={"center-block"}
-					chartType="LineChart"
-					loader={<div>Loading Chart</div>}
-					data={categoriesByYear}
-					options={{
-						title: 'Categories by Year',
-						isStacked: 'relative',
-						chartArea: {'width': '80%', 'height': '80%'},
-						hAxis: {
-							title: 'Year',
-						},
-						vAxis: {
-							title: 'Count',
-							format: 0,
-						},
-						tooltip: {isHtml: true, trigger: 'selection'},
-						legend: 'bottom',
-					}}
-				/>
+				<h2>Categories by Year</h2>
+				<div className={"col-xs-2"}>
+					<h4>Select categories: </h4>
+					{this.selectCategories(this.state.allCategories)}
+				</div>
+				<div className={"col-xs-10"}>
+					<Chart
+						height={700}
+						className={"center-block"}
+						chartType="LineChart"
+						loader={<div>Loading Chart</div>}
+						data={categoriesByYear}
+						options={{
+							title: 'Categories by Year',
+							isStacked: 'relative',
+							chartArea: {'width': '80%', 'height': '80%'},
+							hAxis: {
+								title: 'Year',
+								ticks: 2,
+							},
+							vAxis: {
+								title: 'Count',
+								format: 0,
+							},
+							tooltip: {isHtml: true, trigger: 'selection'},
+							legend: 'bottom',
+						}}
+					/>
+				</div>
 			</>
 		)
 	}

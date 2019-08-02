@@ -15,12 +15,13 @@ class App extends Component{
 
         this.state = {
             loading: true,
-	        range: {min: 1993, max: 2019}
+	        range: {min: 1993, max: 2019},
+	        toggle: true
         }
     }
 
     loadData() {
-        fetch(`/data/data.json`)
+        fetch(`data/data.json`)
             .then( (response) => {
                 return response.json()
             })
@@ -48,6 +49,10 @@ class App extends Component{
 	        loading: true,
             data: this.loadData()
         })
+    }
+
+    handleSidebarToggle(){
+		this.setState({toggle: !this.state.toggle})
     }
 
     handleRangeChange = (range) => {
@@ -131,10 +136,20 @@ class App extends Component{
 						{categoryFilter}
 					</div>
 				</nav>
-				<div id="content" className="row text-center">
+				<div id="toggle" className={"visible-xs-* hidden-sm " + (this.state.toggle? "" : "show")}>
+					<button type="button" onClick={(e) => this.handleSidebarToggle()} className="btn btn-default">
+						<span
+							className={"glyphicon glyphicon-" + (this.state.toggle? "align-justify" : "remove")}
+							aria-hidden="true"
+						>
+						</span>
+					</button>
+				</div>
+
+				<div className="content row">
 					<div id="intro" className="col-xs-12">
 						<h1 className="text-center">Essential Mix statistics</h1>
-						<p className="lead">
+						<p className="lead text-center">
 							Explore the statistics and history of the BBC Radio 1 Essential Mix.
 						</p>
 						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
@@ -145,7 +160,7 @@ class App extends Component{
 								pivotal role within the scene.
 							</p>
 							<p>
-								Using the crowdsourced tracklist website <a href="https://www.mixesdb.com/">Mixesdb </a>
+								Using the crowdsourced tracklist website <a href="https://www.mixesdb.com/">MixesDB </a>
 								I've gathered information about the performers, artists, tracklists and genres from more than
 								1400 editions of the Essential Mix. Look below for some insight into the history, evolution
 								and trends of the last 23 years in dance music. Note that on most of the charts you can

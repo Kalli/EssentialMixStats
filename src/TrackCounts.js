@@ -61,7 +61,7 @@ export default class TrackCounts extends Component {
 			tooltip += `<li>Median track count: ${median}</li>`
 			tooltip += `</ul>`
 
-			acc.push([year, min, lowestQuartile, highestQuartile, max, tooltip])
+			acc.push([year, average, min, lowestQuartile, highestQuartile, max, tooltip])
 			return acc
 		}, [])
 	}
@@ -74,15 +74,16 @@ export default class TrackCounts extends Component {
 				<Chart
 					height={900}
 					className={"center-block"}
-					chartType="CandlestickChart"
+					chartType="LineChart"
 					loader={<div>Loading Chart</div>}
 					data={[
 						[
 							{id: 'date', label: 'Year', type: 'string'},
-							{id: 'min', label: 'Min', type: 'number'},
-							{id: 'lowQ', label: 'Lowest Q', type: 'number'},
-							{id: 'highQ', label: 'Highest Q', type: 'number'},
-							{id: 'max', label: 'Max', type: 'number'},
+							{id: 'average', label: 'Average', type: 'number'},
+							{id: 'min',  type: 'number', role: 'interval'},
+							{id: 'lowQ', type: 'number', role: 'interval'},
+							{id: 'highQ', type: 'number', role: 'interval'},
+							{id: 'max', type: 'number', role: 'interval'},
 							{type: 'string', role: 'tooltip', 'p': {'html': true}},
 						],
 						...mixes
@@ -97,7 +98,10 @@ export default class TrackCounts extends Component {
 							title: 'Tracks per mix',
 						},
 						tooltip: {isHtml: true, trigger: 'selection'},
-                        legend: {position: 'none'},
+                        legend: {position: 'bottom'},
+						curveType: 'function',
+						lineWidth: 4,
+						intervals: { 'lineWidth': 2, 'barWidth': 20, style: 'area' },
 					}}
 				/>
 				<div className="track-count-controls text-center">

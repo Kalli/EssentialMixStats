@@ -184,7 +184,7 @@ class App extends Component{
 						<h2>How Many Tunes?</h2>
 						<div className={"introduction col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
-								Lets start of with what is quite possibly the driest graph but what was the
+								Lets start of with what is quite possibly the driest graph but the one that was the
 								impetus for me to compile all this information in the first place. My basic question was:
 								<i> has digital dj'ing resulted in djs playing more tracks in their mixes</i>? The
 								Essential Mix tracklists seemed like a good data set to research this. A standard two
@@ -214,11 +214,11 @@ class App extends Component{
 						<div className={"col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
 								Loking at the graph I feel supported in my hunch that technology has resulted in djs
-								mixing from one song to the next one faster. This type of chart is called a candlestick chart,
-								the "wicks" on either end represent the outliers, the mixes with most and fewest tunes
-								that year. The box in between represents the center of the range, this is where 50% of
-								all the mixes fall (so excluding the bottom and top 25% respectively) of all
-								values. This shows a bit more detail than a simple average or median chart.
+								mixing from one song to the next one faster. The line in this chart represents the average
+								number of songs per mix by year. The darker shaded area represents the middle of the range,
+								this is where 50% of all the mixes fall (so excluding the bottom and top 25% respectively)
+								in terms of the number of songs included. The lighter shaded area represents the extremes on
+								both ends, the 25% of the mixes with the most and fewest songs.
 							</p>
 							<p>
 								You can see that right around 2005 the average number of tracks played in an Essential

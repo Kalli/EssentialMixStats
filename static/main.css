@@ -122,8 +122,8 @@ nav#sidebar ul{
     }
 }
 
-.track-count-tooltip ul{
-    text-align: left;
+.track-count-tooltip h4{
+    text-align: center;
 }
 
 .track-count-controls{

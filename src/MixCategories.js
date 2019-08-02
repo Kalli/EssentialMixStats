@@ -80,7 +80,7 @@ export default class MixCategories extends Component {
 			<div className={"text-left"}>
 				{categories.map((c) => {
 					return (
-						<label className={"checkbox"} key={c}>
+						<label className={"checkbox col-xs-6 col-md-12"} key={c}>
 							<input
 								type={"checkbox"}
 								checked={this.state.selectedCategories.includes(c)}
@@ -127,11 +127,7 @@ export default class MixCategories extends Component {
 					}}
 				/>
 				<h2>Categories by Year</h2>
-				<div className={"col-xs-2"}>
-					<h4>Select categories: </h4>
-					{this.selectCategories(this.state.allCategories)}
-				</div>
-				<div className={"categories-year-chart col-xs-10"}>
+				<div className={"categories-year-chart col-md-10 col-xs-12"}>
 					<Chart
 						height={700}
 						className={"center-block"}
@@ -154,6 +150,10 @@ export default class MixCategories extends Component {
 							legend: 'bottom',
 						}}
 					/>
+				</div>
+				<div className={"select-categories col-md-2 col-xs-12"}>
+					<h4>Select categories: </h4>
+					{this.selectCategories(this.state.allCategories)}
 				</div>
 			</div>
 		)

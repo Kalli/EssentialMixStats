@@ -110,6 +110,18 @@ nav#sidebar ul{
     height: 16px;
 }
 
+@media (max-width: 768px) {
+    .select-categories div{
+        max-height: 200px;
+        overflow-y: auto;
+        display:inline-block;
+        padding-left: 20px;
+    }
+    .select-categories{
+        padding-bottom: 20px;
+    }
+}
+
 .track-count-tooltip ul{
     text-align: left;
 }

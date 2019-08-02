@@ -101,12 +101,10 @@ class App extends Component{
 			selectedCategory={this.state.selectedCategory}
 		    changeHandler={this.handleCategoryChange}
 		/>
-
 		return(
 			<div className="wrapper">
-
-				<nav id="sidebar">
-					<div className="sidebar-header col-xs-12">
+				<nav id="sidebar" className={!this.state.toggle? "visible" : ""}>
+					<div className="">
 						<h3>Essential Mix Stats</h3>
 						<ul className={"lead"}>
 							<li>
@@ -152,7 +150,7 @@ class App extends Component{
 						<p className="lead text-center">
 							Explore the statistics and history of the BBC Radio 1 Essential Mix.
 						</p>
-						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
+						<div className={"col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
 								The BBC Radio 1 <a href="https://www.bbc.co.uk/programmes/b006wkfp" target="blank">
 								Essential Mix</a> is an institution within dance music. Running since 1993 it has
@@ -184,7 +182,7 @@ class App extends Component{
 					</div>
 					<div id={"track-counts"} className="col-xs-12">
 						<h2>How Many Tunes?</h2>
-						<div className={"introduction col-xs-8 col-xs-offset-2 text-left"}>
+						<div className={"introduction col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
 								Lets start of with what is quite possibly the driest graph but what was the
 								impetus for me to compile all this information in the first place. My basic question was:
@@ -213,7 +211,7 @@ class App extends Component{
 						{trackCounts}
 					</div>
 					<div className="col-xs-12">
-						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
+						<div className={"col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
 								Loking at the graph I feel supported in my hunch that technology has resulted in djs
 								mixing from one song to the next one faster. This type of chart is called a candlestick chart,
@@ -242,7 +240,7 @@ class App extends Component{
 					</div>
 					<div id={"most-played"} className="col-xs-12 track-statistics">
 						<h2>Most Played Tracks, Artists and Genres </h2>
-						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
+						<div className={"col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
 								In the tables below you can see the most played tracks, artists and labels in the
 								history of the Essential Mix. You'll find the top 250 most played from each of these
@@ -259,7 +257,7 @@ class App extends Component{
 							</p>
 						</div>
 						{mostPlayedTracks}
-						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
+						<div className={"col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
 								Underworld tops the artist top list as well, but Daft Punk come in a close second.
 								The list is understandably a bit UK centric. On the label side the almighty
@@ -276,7 +274,7 @@ class App extends Component{
 					</div>
 					<div id={"dj-counts"} className="col-xs-12">
 						<h2>Which DJs?</h2>
-						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
+						<div className={"col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
 								I fetched data for 1344 mixes (discounting some duplicates) on which 889 artists have
 								played. Of those 658 have played the Essential Mix once, while around 130 have featured
@@ -285,7 +283,7 @@ class App extends Component{
 							</p>
 						</div>
 						{djCounts}
-						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
+						<div className={"col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
 								In this chart you can see which djs have had multiple occurrences and how they are
 								divided (click on each column to see which djs it includes). Obviously Pete Tong, the
@@ -298,7 +296,7 @@ class App extends Component{
 					</div>
 					<div id={"mix-categories"} className="col-xs-12">
 						<h2>Categories and Genres</h2>
-						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
+						<div className={"col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
 								The last bit of data to look into is the categories. I've filtered out the ones related to
 								the tracklists or the artists and that leaves us with genre information. Now this always
@@ -314,7 +312,7 @@ class App extends Component{
 							</p>
 						</div>
 						{mixCategories}
-						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
+						<div className={"col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
 								In the second chart you can select categories to see how they are spread out through
 								the years. I found clicking around here to be quite the history lesson. Its interesting
@@ -326,7 +324,7 @@ class App extends Component{
 					</div>
 					<div id={"outro"} className="col-xs-12">
 						<h2>Outro</h2>
-						<div className={"col-xs-8 col-xs-offset-2 text-left"}>
+						<div className={"col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
 								I hope you enjoyed this statistical perspective into the history of the Essential Mix.
 								Again the code and the data can be found on <a href="https://github.com/Kalli/EssentialMixStats">Github</a>.

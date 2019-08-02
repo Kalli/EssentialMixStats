@@ -2,6 +2,10 @@
     height:200px;
 }
 
+body{
+    font-size: 16px;
+}
+
 .wrapper {
     display: flex;
     width: 100%;
@@ -22,6 +26,7 @@ div#toggle button{
     background-color: #f7f7f7;
     border-left:0;
     border-radius: 0 20% 20% 0;
+    font-size: 25px;
 }
 
 nav#sidebar {
@@ -83,6 +88,7 @@ nav#sidebar ul{
 
 .content{
     margin-top: 1.5em;
+    font-size: 150%;
 }
 
 .tracks-table{

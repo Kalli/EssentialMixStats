@@ -146,7 +146,7 @@ class App extends Component{
 
 				<div className="content row">
 					<div id="intro" className="col-xs-12">
-						<h1 className="text-center">Essential Mix statistics</h1>
+						<h1 className="text-center">Essential Mix Statistics</h1>
 						<p className="lead text-center">
 							Explore the statistics and history of the BBC Radio 1 Essential Mix.
 						</p>
@@ -159,7 +159,7 @@ class App extends Component{
 							</p>
 							<p>
 								Using the crowdsourced tracklist website <a href="https://www.mixesdb.com/">MixesDB </a>
-								I've gathered information about the performers, artists, tracklists and genres from more than
+								I gathered information about the performers, artists, tracklists and genres from more than
 								1400 editions of the Essential Mix. Look below for some insight into the history, evolution
 								and trends of the last 23 years in dance music. Note that on most of the charts you can
 								click the graphs to learn more about them and in the left hand side there are filters

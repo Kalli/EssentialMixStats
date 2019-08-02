@@ -134,7 +134,7 @@ class App extends Component{
 						{categoryFilter}
 					</div>
 				</nav>
-				<div id="toggle" className={"visible-xs-* hidden-sm " + (this.state.toggle? "" : "show")}>
+				<div id="toggle" className={"visible-xs visible-sm hidden-md " + (this.state.toggle? "" : "show")}>
 					<button type="button" onClick={(e) => this.handleSidebarToggle()} className="btn btn-default">
 						<span
 							className={"glyphicon glyphicon-" + (this.state.toggle? "align-justify" : "remove")}

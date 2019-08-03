@@ -166,7 +166,7 @@ class App extends Component{
 								for categories and date ranges.
 							</p>
 							<p>
-								There are some of caveats. All of this information is parsed from incomplete user entered
+								There are some caveats. All of this information is parsed from incomplete user entered
 								tracklists and not from detailed, structured or verified data. Some of it is purely subjective
 								(category and genre tags) while other facets are pretty objective (dates, track counts).
 								There is a lot of data, more than has been possible to humanly verify in detail. Minor

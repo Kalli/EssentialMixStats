@@ -80,7 +80,7 @@ export default class MostPlayedTracks extends Component {
 			["https://www.discogs.com/search/?type=all&q=", "Discogs.png"],
 			["https://www.mixesdb.com/db/index.php?fulltext=Search&title=&search=", "Mixesdb.png"],
 		].map((site, index) => {
-			const link = site[0]+searchTerm
+			const link = site[0]+escape(searchTerm)
 			return (
 				<a href={link} key={index} target="_blank">
 					<img src={this.state.url+"/static/"+site[1]} alt={site[1].replace(".png", "")}/>

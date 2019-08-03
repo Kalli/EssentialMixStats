@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --env.production",
     "test": "jest",
     "start": "webpack-dev-server --progress --inline"
   },

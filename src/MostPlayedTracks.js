@@ -7,7 +7,7 @@ import {createMixLink} from './lib'
 export default class MostPlayedTracks extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {active: "tracks"}
+		this.state = {active: "tracks", url: window.location.href}
 	}
 
 	addOrAppend(counter, element, link){
@@ -81,7 +81,11 @@ export default class MostPlayedTracks extends Component {
 			["https://www.mixesdb.com/db/index.php?fulltext=Search&title=&search=", "Mixesdb.png"],
 		].map((site, index) => {
 			const link = site[0]+searchTerm
-			return (<a href={link} key={index} target="_blank"><img src={"/static/"+site[1]} alt={site[1].replace(".png", "")}/></a>)
+			return (
+				<a href={link} key={index} target="_blank">
+					<img src={this.state.url+"/static/"+site[1]} alt={site[1].replace(".png", "")}/>
+				</a>
+			)
 		})
 	}
 

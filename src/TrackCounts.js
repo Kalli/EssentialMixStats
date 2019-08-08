@@ -53,7 +53,7 @@ export default class TrackCounts extends Component {
 			const mostTracks = createMixLink(mixesByYear[year].mixes.find((mix) => mix.tracklist.length === max));
 			const fewestTracks = createMixLink(mixesByYear[year].mixes.find((mix) => mix.tracklist.length === min));
 
-			let tooltip = `<div class="track-count-tooltip"><h4>${year}</h4><ul>`
+			let tooltip = `<div class="track-count-tooltip chart-tooltip"><h4>${year}</h4><ul>`
 			tooltip += `<li>Number of mixes: ${sorted.length}</li> `
 			tooltip += `<li>Most tracks: ${max} - ${mostTracks}</li>`
 			tooltip += `<li>Fewest tracks : ${min} - ${fewestTracks} </li>`

@@ -25,7 +25,9 @@ export default class MixCategories extends Component {
 			if (category.count >= 5) {
 				const link = "https://www.mixesdb.com/w/Special:Search?fulltext=Search&cat=Essential+Mix&search="+category.name
 				const count = category.count
-				const toolTip = `<h4><a href="${link}" target="_blank">${category.name}</a> - ${count}</h4>`
+				const toolTip = `<div class="chart-tooltip">
+									<h4><a href="${link}" target="_blank">${category.name}</a> - ${count}</h4>
+								</div>`
 				acc.push([category.name, category.count, toolTip])
 			}
 			return acc

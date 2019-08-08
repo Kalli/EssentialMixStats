@@ -128,7 +128,12 @@ nav#sidebar ul{
     }
 }
 
-.track-count-tooltip h4{
+.chart-tooltip{
+    padding: 20px;
+    min-width: 200px;
+}
+
+.chart-tooltip h4{
     text-align: center;
 }
 

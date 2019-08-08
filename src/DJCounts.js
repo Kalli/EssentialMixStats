@@ -64,8 +64,8 @@ export default class DJCounts extends Component {
 			return acc + item
 		}, "")
 
-		return (`<div class="dj-counts-tooltip">
-					<h5>${bucket} appearances</h5>
+		return (`<div class="dj-counts-tooltip chart-tooltip">
+					<h4>${bucket} appearances</h4>
 					<ul class="text-left">
 						${listItems}
 					</ul>

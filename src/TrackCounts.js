@@ -104,6 +104,10 @@ export default class TrackCounts extends Component {
 						lineWidth: 4,
 						intervals: { 'lineWidth': 2, 'barWidth': 20, style: 'area' },
 					}}
+					chartEvents={[{
+						eventName: "ready",
+						callback: ({ chartWrapper, google }) => closeTooltipsOnClicks(chartWrapper, google)
+					}]}
 				/>
 				<div className="track-count-controls text-center">
 	                <label className="checkbox-inline" >

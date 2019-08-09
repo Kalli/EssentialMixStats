@@ -23,6 +23,17 @@ export function categoryCounts(mixes, filters) {
 	}, {})
 }
 
+export function closeTooltipsOnClicks(chartWrapper, google){
+	// Close tooltips / set chart selection to null when click events aren't data points or graph objects
+	const chart = chartWrapper.getChart()
+	const validTargets = ["point", "bar"]
+	google.visualization.events.addListener(chart, "click", e => {
+		if (validTargets.every((target) => { return e.targetID.indexOf(target) === -1})){
+			chart.setSelection(null)
+		}
+	})
+}
+
 export function reduceCategories(mixes, filters) {
 	const mixesByCategory = categoryCounts(mixes, filters)
 	return Object.entries(mixesByCategory).reduce((acc, c) => {

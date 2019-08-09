@@ -1,6 +1,6 @@
 import {Chart} from 'react-google-charts';
 import React, { Component} from "react"
-import {reduceCategories} from "./lib"
+import {reduceCategories, closeTooltipsOnClicks} from "./lib"
 
 
 export default class MixCategories extends Component {
@@ -127,6 +127,10 @@ export default class MixCategories extends Component {
 						tooltip: {isHtml: true, trigger: 'selection'},
 						legend: 'none',
 					}}
+					chartEvents={[{
+						eventName: "ready",
+						callback: ({ chartWrapper, google }) => closeTooltipsOnClicks(chartWrapper, google)
+					}]}
 				/>
 				<h2>Categories by Year</h2>
 				<div className={"categories-year-chart col-md-10 col-xs-12"}>
@@ -151,6 +155,10 @@ export default class MixCategories extends Component {
 							tooltip: {isHtml: true, trigger: 'selection'},
 							legend: 'bottom',
 						}}
+						chartEvents={[{
+							eventName: "ready",
+							callback: ({ chartWrapper, google }) => closeTooltipsOnClicks(chartWrapper, google)
+						}]}
 					/>
 				</div>
 				<div className={"select-categories col-md-2 col-xs-12"}>

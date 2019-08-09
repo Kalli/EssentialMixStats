@@ -1,5 +1,6 @@
 import {Chart} from 'react-google-charts';
 import React, { Component} from "react"
+import {closeTooltipsOnClicks} from './lib'
 
 
 export default class DJCounts extends Component {
@@ -103,6 +104,10 @@ export default class DJCounts extends Component {
 						tooltip: {isHtml: true, trigger: 'selection'},
 						legend: 'none',
 					}}
+					chartEvents={[{
+						eventName: "ready",
+						callback: ({ chartWrapper, google }) => closeTooltipsOnClicks(chartWrapper, google)
+					}]}
 				/>
 			</div>
 		)

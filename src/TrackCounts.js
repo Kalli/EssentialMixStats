@@ -1,6 +1,6 @@
 import {Chart} from 'react-google-charts';
 import React, { Component} from "react"
-import {completeTracklist, createMixLink} from "./lib"
+import {completeTracklist, createMixLink, closeTooltipsOnClicks} from "./lib"
 
 
 export default class TrackCounts extends Component {
@@ -79,7 +79,7 @@ export default class TrackCounts extends Component {
 					data={[
 						[
 							{id: 'date', label: 'Year', type: 'string'},
-							{id: 'average', label: 'Average', type: 'number'},
+							{id: 'average', label: 'Average number of tracks per mix', type: 'number'},
 							{id: 'min',  type: 'number', role: 'interval'},
 							{id: 'lowQ', type: 'number', role: 'interval'},
 							{id: 'highQ', type: 'number', role: 'interval'},
@@ -89,6 +89,7 @@ export default class TrackCounts extends Component {
 						...mixes
 					]}
 					options={{
+						pointSize: 10,
 						title: 'Number of Tracks per Essential Mix by Year',
 						chartArea: {'width': '80%', 'height': '80%'},
 						hAxis: {

@@ -172,8 +172,8 @@ class App extends Component{
 								There is a lot of data, more than has been possible to humanly verify in detail. Minor
 								variations in spelling or casing, typos, might play a role in the results.
 								If you are interested in the code behind both getting the data and visualising it or the
-								raw data itself you can find it on  <a href="https://github.com/Kalli/EssentialMixStats">Github</a>. If you
-								have any questions you can hit me up on <a href="http://twitter.com/karltryggvason">
+								raw data itself you can find it on  <a target={"_blank"} href="https://github.com/Kalli/EssentialMixStats">Github</a>. If you
+								have any questions you can hit me up on <a target={"_blank"}  href="http://twitter.com/karltryggvason">
 								@karltryggvason</a> on Twitter or shoot me an email at <a href="mailto:ktryggvason@gmail.com">
 								ktryggvason@gmail.com</a>.
 							</p>
@@ -215,13 +215,13 @@ class App extends Component{
 							<p>
 								Loking at the graph I feel supported in my hunch that technology has resulted in djs
 								mixing from one song to the next one faster. The line in this chart represents the average
-								number of songs per mix by year. The darker shaded area represents the middle of the range,
+								number of songs per mix by year. The lightest shaded area represents the middle of the range,
 								this is where 50% of all the mixes fall (so excluding the bottom and top 25% respectively)
-								in terms of the number of songs included. The lighter shaded area represents the extremes on
-								both ends, the 25% of the mixes with the most and fewest songs.
+								in terms of the number of songs included. The middle covers the range from 5th to 95th percentile and
+								the darkest area represents the extremes on both ends, the mixes with the fewest and the most mixes.
 							</p>
 							<p>
-								You can see that right around 2005 the average number of tracks played in an Essential
+								You can see that right after bottoming out in 2001 the average number of tracks played in an Essential
 								Mix starts inching upwards. In the 90s the majority of mixes had between 20 and 30 tracks,
 								around 4-6 minutes per track on average. But around 15 years ago that started inching
 								up to between 30 to 40 tracks per mix or 3-4 minutes per track.
@@ -248,7 +248,7 @@ class App extends Component{
 								and when.
 							</p>
 							<p>
-								For tracks. Donna Summer's disco classic <i>I Feel Love</i> and the Underworld stable
+								In tracks, Donna Summer's disco classic <i>I Feel Love</i> and the Underworld stable
 								<i> Born Slippy</i> come in at the top with 15 plays each and after that its one classic
 								after the other. Older tracks naturally appear more frequently than newer tracks
 								(having had more years to have been played). Interesting to see Donna Summer top
@@ -260,7 +260,7 @@ class App extends Component{
 						<div className={"col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
 								Underworld tops the artist top list as well, but Daft Punk come in a close second.
-								The list is understandably a bit UK centric. On the label side the almighty
+								The list is understandably somewhat UK centric. On the label side the almighty
 								<i> White Label</i> comes out on top, <i>Unreleased</i> and <i>Acetate</i> get a fair
 								few mentions as well. Otherwise the top places are taken up by some of the bigger
 								more established labels in the scene, with <i>FFRR</i> taking first place by quite a
@@ -299,14 +299,14 @@ class App extends Component{
 						<div className={"col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
 								The last bit of data to look into is the categories. I've filtered out the ones related to
-								the tracklists or the artists and that leaves us with genre information. Now this always
-								going to be subjective. Where is the line between techno, tech house and house? Ask ten
-								nerds and you'll get ten answers. But regardless, its interesting to see how genres are
-								born, evolve and (in some cases) die.
+								the tracklists or the artists and that leaves us with genre information. Now this is
+								always going to be subjective. Where is the line between techno, tech house and house? Ask ten
+								nerds and you'll get ten different answers. But regardless, its interesting to see how genres
+								are born, evolve and (in some cases) die.
 							</p>
 							<p>
 								In the first chart, you can see that house reigns supreme in the Essential Mix. There are
-								444 mixes categorized as house, almost two times more than the runner up, tech house.
+								444 mixes categorized as house, almost twice as many than the runner up, tech house.
 								After that is the other big 4x4 genres, but then there's quite a drop off before the more
 								breakbeat oriented genres show up.
 							</p>
@@ -327,9 +327,9 @@ class App extends Component{
 						<div className={"col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
 								I hope you enjoyed this statistical perspective into the history of the Essential Mix.
-								Again the code and the data can be found on <a href="https://github.com/Kalli/EssentialMixStats">Github</a>.
+								Again the code and the data can be found on <a target={"_blank"} href="https://github.com/Kalli/EssentialMixStats">Github</a>.
 								If you see any bugs or inconsistencies in the data you can let me know on
-								<a href="http://twitter.com/karltryggvason">@karltryggvason</a> on Twitter or send me an
+								<a target={"_blank"} href="http://twitter.com/karltryggvason">@karltryggvason</a> on Twitter or send me an
 								email <a href="mailto:ktryggvason@gmail.com">ktryggvason@gmail.com</a>.
 							</p>
 						</div>

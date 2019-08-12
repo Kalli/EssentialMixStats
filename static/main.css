@@ -142,6 +142,7 @@ nav#sidebar ul{
 }
 
 .track-count-controls{
+    font-size: 0.8em;
     padding-bottom: 1em;
 }
 
@@ -157,4 +158,11 @@ nav#sidebar ul{
 
 .content h2{
     text-align: center;
+    max-width: 80%;
+}
+
+.overlay span{
+    width: 25%;
+    margin-right: 0.5em;
+    color: #f7f7f7;
 }

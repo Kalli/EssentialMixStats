@@ -47,28 +47,44 @@ export default class TrackCounts extends Component {
 			const max = sorted[sorted.length - 1]
 			const min = sorted[0]
 
+			const lowestFive = sorted[Math.floor((mixCount-1) * 0.05)]
 			const lowestQuartile = sorted[Math.floor((mixCount-1) * 0.25)]
 			const highestQuartile = sorted[Math.floor((mixCount-1) * 0.75)]
+			const highestFive = sorted[Math.floor((mixCount-1) * 0.95)]
 
 			const mostTracks = createMixLink(mixesByYear[year].mixes.find((mix) => mix.tracklist.length === max));
 			const fewestTracks = createMixLink(mixesByYear[year].mixes.find((mix) => mix.tracklist.length === min));
+			const tooltipLink = "https://www.mixesdb.com/w/Special:Search?fulltext=Search&cat=Essential+Mix&search="+year
+			let tooltip = `<div class="track-count-tooltip chart-tooltip">
+				<h4>
+					<a href="${tooltipLink}" target="_blank">${year}</a>
+				</h4>
+				<ul>
+				<li>Number of mixes: ${sorted.length}</li> 
+				<li>Most tracks: ${max} - ${mostTracks}</li>
+				<li>Fewest tracks : ${min} - ${fewestTracks} </li>
+				<li>Average track count: ${average}</li>
+				<li>Median track count: ${median}</li>
+			</ul>`
 
-			let tooltip = `<div class="track-count-tooltip chart-tooltip"><h4>${year}</h4><ul>`
-			tooltip += `<li>Number of mixes: ${sorted.length}</li> `
-			tooltip += `<li>Most tracks: ${max} - ${mostTracks}</li>`
-			tooltip += `<li>Fewest tracks : ${min} - ${fewestTracks} </li>`
-			tooltip += `<li>Average track count: ${average}</li>`
-			tooltip += `<li>Median track count: ${median}</li>`
-			tooltip += `</ul>`
-
-			acc.push([year, average, min, lowestQuartile, highestQuartile, max, tooltip])
+			acc.push([
+				year,
+				average,
+				min,
+				lowestFive,
+				lowestQuartile,
+				highestQuartile,
+				highestFive,
+				max,
+				tooltip
+			])
 			return acc
 		}, [])
 	}
 
 	render(){
 		const mixes = this.formatData(this.props.mixes)
-
+		const colors = [ "#699CFF", "#578AF0", "#4578DE", "#3366cc"]
 		return(
 			<>
 				<Chart
@@ -80,10 +96,12 @@ export default class TrackCounts extends Component {
 						[
 							{id: 'date', label: 'Year', type: 'string'},
 							{id: 'average', label: 'Average number of tracks per mix', type: 'number'},
-							{id: 'min',  type: 'number', role: 'interval'},
-							{id: 'lowQ', type: 'number', role: 'interval'},
-							{id: 'highQ', type: 'number', role: 'interval'},
-							{id: 'max', type: 'number', role: 'interval'},
+							{id: 'min-max',  type: 'number', role: 'interval'},
+							{id: 'ninetyFive', type: 'number', role: 'interval'},
+							{id: 'fifty', type: 'number', role: 'interval'},
+							{id: 'fifty', type: 'number', role: 'interval'},
+							{id: 'ninetyFive', type: 'number', role: 'interval'},
+							{id: 'min-max', type: 'number', role: 'interval'},
 							{type: 'string', role: 'tooltip', 'p': {'html': true}},
 						],
 						...mixes
@@ -102,7 +120,18 @@ export default class TrackCounts extends Component {
                         legend: {position: 'bottom'},
 						curveType: 'function',
 						lineWidth: 4,
-						intervals: { 'lineWidth': 2, 'barWidth': 20, style: 'area' },
+						intervals: {
+							'lineWidth': 2,
+							style: 'area',
+						},
+						series: [{
+								color: colors[3]
+						}],
+						interval: {
+			                'min-max': {style:'area', color:colors[2], fillOpacity: 1},
+				            'ninetyFive': {style:'area', color:colors[1], fillOpacity: 1},
+				            'fifty': {style:'area', color:colors[0], fillOpacity: 1},
+						}
 					}}
 					chartEvents={[{
 						eventName: "ready",
@@ -110,6 +139,17 @@ export default class TrackCounts extends Component {
 					}]}
 				/>
 				<div className="track-count-controls text-center">
+					<div className={"overlay"}>
+						<span className={"label label-default"} style={{backgroundColor: colors[0]}}>
+							50% of all mixes (25%-75%)
+						</span>
+						<span className={"label label-default"} style={{backgroundColor: colors[1]}}>
+							95% of all mixes (5%-95%)
+						</span>
+						<span className={"label label-default"} style={{backgroundColor: colors[2]}}>
+							Outliers (fewest and most tracks)
+						</span>
+					</div>
 	                <label className="checkbox-inline" >
 						<input type="checkbox"
 						       value="hideIncomplete"

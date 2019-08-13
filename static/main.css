@@ -68,6 +68,9 @@ nav#sidebar ul{
         margin-left: -0px !important;
         border-right: 1px #ccc solid;
     }
+    body {
+        font-size: 22px;
+    }
 }
 
 .category-button button{

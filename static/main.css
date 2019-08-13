@@ -44,7 +44,6 @@ nav#sidebar {
 nav#sidebar h4{
     margin-bottom: 1em;
     margin-top: 1em;
-
 }
 
 nav#sidebar ul{
@@ -158,7 +157,6 @@ nav#sidebar ul{
 
 .content h2{
     text-align: center;
-    max-width: 80%;
 }
 
 .overlay span{

@@ -130,13 +130,15 @@ nav#sidebar ul{
     }
 }
 
-.select-categories label {
+.select-categories label.checkbox {
     font-size: 0.6em;
+    margin-top: 0;
 }
 
 .chart-tooltip{
     padding: 20px;
     min-width: 200px;
+    font-size: 1.2em;
 }
 
 .chart-tooltip h4{

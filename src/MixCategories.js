@@ -1,6 +1,6 @@
 import {Chart} from 'react-google-charts';
 import React, { Component} from "react"
-import {reduceCategories, closeTooltipsOnClicks} from "./lib"
+import {reduceCategories, closeTooltipsOnClicks, colors} from "./lib"
 
 
 export default class MixCategories extends Component {
@@ -14,7 +14,7 @@ export default class MixCategories extends Component {
 		this.state = {
 			categoryCounts: categoryCounts,
 			allCategories: categories,
-			selectedCategories: categories.slice(0, 3)
+			selectedCategories: ["House", "Trance", "Minimal", "Dubstep"]
 		}
 	}
 
@@ -53,8 +53,9 @@ export default class MixCategories extends Component {
 			}
 			return acc
 		}, yearMap)
+
 		const header = [
-			{id: 'year', label: 'Year', type: 'string'},
+			{id: 'year', label: 'Year', type: 'number'},
 			...categories.map((cat) => ({id: cat, label: cat, type: 'number'}))
 		]
 
@@ -99,6 +100,11 @@ export default class MixCategories extends Component {
 
 	render(){
 		const categoriesByYear = this.getCategoriesByYears(this.props.mixes, this.state.selectedCategories)
+		const styles = categoriesByYear[0].slice(1).reduce((acc, e, index) => {
+			acc[index] = {'color': colors[this.state.allCategories.indexOf(e.id)]}
+			return acc
+		}, {})
+
 		return 	(
 			<div className={"col-xs-12"}>
 				<h2>Mixes by Categories</h2>
@@ -141,17 +147,21 @@ export default class MixCategories extends Component {
 						loader={<div>Loading Chart</div>}
 						data={categoriesByYear}
 						options={{
+							pointSize: 5,
 							title: 'Categories by Year',
 							isStacked: 'relative',
-							chartArea: {'width': '80%', 'height': '80%'},
+							chartArea: {'width': '90%', 'height': '80%'},
 							hAxis: {
 								title: 'Year',
-								ticks: 2,
+								format: 0,
+								minorGridlines: {count: 1}
 							},
 							vAxis: {
 								title: 'Count',
 								format: 0,
+								viewWindow: {max : 40, min: 0}
 							},
+							series: styles,
 							tooltip: {isHtml: true, trigger: 'selection'},
 							legend: 'bottom',
 						}}

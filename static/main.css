@@ -118,6 +118,7 @@ nav#sidebar ul{
     font-size: 16px;
 }
 .track-statistics th { text-align: center;}
+.track-statistics td:nth-child(1n) { text-align: center }
 .track-statistics td:nth-child(2n) { text-align: left }
 .track-statistics .links {
     text-align: left;

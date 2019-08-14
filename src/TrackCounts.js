@@ -166,6 +166,9 @@ export default class TrackCounts extends Component {
 						/>
 						Limit to two hour long mixes
 	                </label>
+					<div className={"small"}>
+						(Click the points in the graph for more information about each year)
+					</div>
 				</div>
 			</>
 		)

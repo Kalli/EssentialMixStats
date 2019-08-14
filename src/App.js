@@ -167,16 +167,9 @@ class App extends Component{
 								Using the crowdsourced tracklist website <a href="https://www.mixesdb.com/">MixesDB </a>
 								I gathered information about the performers, artists, tracklists and genres from more than
 								1400 editions of the Essential Mix. Look below for some insight into the history, evolution
-								and trends of the last 23 years in dance music. Note that on most of the charts you can
-								click the graphs to learn more about them and in the left hand side there are filters
-								for categories and date ranges.
+								and trends of the last 26 years in dance music.
 							</p>
 							<p>
-								There are some caveats. All of this information is parsed from incomplete user entered
-								tracklists and not from detailed, structured or verified data. Some of it is purely subjective
-								(category and genre tags) while other facets are pretty objective (dates, track counts).
-								There is a lot of data, more than has been possible to humanly verify in detail. Minor
-								variations in spelling or casing, typos, might play a role in the results.
 								If you are interested in the code behind both getting the data and visualising it or the
 								raw data itself you can find it on  <a target={"_blank"} href="https://github.com/Kalli/EssentialMixStats">Github</a>. If you
 								have any questions you can hit me up on <a target={"_blank"}  href="http://twitter.com/karltryggvason">
@@ -188,6 +181,9 @@ class App extends Component{
 					</div>
 					<div id={"track-counts"} className="col-xs-12">
 						<h2>How Many Tunes?</h2>
+						<div className={"col-xs-12"}>
+							{trackCounts}
+						</div>
 						<div className={"introduction col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
 								Lets start of with what is quite possibly the driest graph but the one that was the
@@ -211,10 +207,8 @@ class App extends Component{
 								should a dj let tracks breathe and speak for themselves or should they try to creatively
 								put as many of them in a set as they can? There are many styles and schools of thought.
 							</p>
+
 						</div>
-					</div>
-					<div className={"col-xs-12"}>
-						{trackCounts}
 					</div>
 					<div className="col-xs-12">
 						<div className={"col-xs-12 col-md-offset-2 col-md-8 text-left"}>
@@ -334,8 +328,17 @@ class App extends Component{
 							<p>
 								I hope you enjoyed this statistical perspective into the history of the Essential Mix.
 								Big ups to <a href="https://www.mixesdb.com/">MixesDB</a> and the community over there,
-								their tireless trainspotting work is really neat. Again the code and the data
-								can be found on <a target={"_blank"} href="https://github.com/Kalli/EssentialMixStats">Github</a>.
+								their tireless trainspotting work is really neat.
+							</p>
+							<p>
+								There are some caveats. All of this information is parsed from incomplete user entered
+								tracklists and not from detailed, structured or verified data. Some of it is purely subjective
+								(category and genre tags) while other facets are pretty objective (dates, track counts).
+								There is a lot of data, more than has been possible to humanly verify in detail. Minor
+								variations in spelling or casing, typos, might play a role in the results.
+							</p>
+							<p>
+								Again the code and the data can be found on <a target={"_blank"} href="https://github.com/Kalli/EssentialMixStats">Github</a>.
 								If you see any bugs or inconsistencies in the data you can let me know on
 								<a target={"_blank"} href="http://twitter.com/karltryggvason">@karltryggvason</a> on Twitter or send me an
 								email <a href="mailto:ktryggvason@gmail.com">ktryggvason@gmail.com</a>.

@@ -59,13 +59,30 @@ nav#sidebar ul{
         margin-left: 250px;
     }
 }
+
+#footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 5px 10px 5px 10px;
+    max-width: 240px;
+    min-width: 240px;
+}
+
 @media (max-device-width: 768px) {
-    nav#sidebar {
+    nav#sidebar, div#footer {
         margin-left: -250px !important;
     }
 
-    nav#sidebar.visible {
+    div#footer{
+        font-size: 75%;
+    }
+
+    nav#sidebar.visible, div#footer.visible{
         margin-left: -0px !important;
+    }
+
+    nav#sidebar.visible {
         border-right: 1px #ccc solid;
     }
     body {
@@ -83,14 +100,14 @@ nav#sidebar ul{
 
 .categories {
     overflow-y: auto;
-    max-height: 400px;
-    display:inline-block;
+    max-height: 250px;
+    display: inline-block;
     padding-left: 20px;
 }
 
 .content{
     margin-top: 1.5em;
-    font-size: 150%;
+    font-size: 130%;
 }
 
 .tracks-table{

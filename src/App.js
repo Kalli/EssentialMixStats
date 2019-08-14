@@ -104,34 +104,40 @@ class App extends Component{
 		return(
 			<div className="wrapper">
 				<nav id="sidebar" className={!this.state.toggle? "visible" : ""}>
-					<div className="">
-						<h3>Essential Mix Stats</h3>
-						<ul className={"lead"}>
-							<li>
-								<a href="#intro">Intro</a>
-							</li>
-							<li>
-								<a href="#track-counts">How Many Tunes?</a>
-							</li>
-							<li>
-								<a href="#most-played">Most Played Tracks</a>
-							</li>
-							<li>
-								<a href="#dj-counts">Which DJs?</a>
-							</li>
-							<li>
-								<a href="#mix-categories">Categories and Genres</a>
-							</li>
-							<li>
-								<a href="#outro">Outro</a>
-							</li>
-						</ul>
-						<h3>Controls</h3>
-						<p className={"small"}>
-							Filter based on categories or year ranges. The charts update automatically.
-						</p>
-						{rangeFilter}
-						{categoryFilter}
+					<h3>Essential Mix Stats</h3>
+					<ul className={"lead"}>
+						<li>
+							<a href="#intro">Intro</a>
+						</li>
+						<li>
+							<a href="#track-counts">How Many Tunes?</a>
+						</li>
+						<li>
+							<a href="#most-played">Most Played Tracks</a>
+						</li>
+						<li>
+							<a href="#dj-counts">Which DJs?</a>
+						</li>
+						<li>
+							<a href="#mix-categories">Categories and Genres</a>
+						</li>
+						<li>
+							<a href="#outro">Outro</a>
+						</li>
+					</ul>
+					<h3>Controls</h3>
+					<p className={"small"}>
+						Filter based on categories or year ranges. The charts update automatically.
+					</p>
+					{rangeFilter}
+					{categoryFilter}
+					<div id="footer" className={"text-center small " + (!this.state.toggle? "visible" : "")}>
+						<div>
+							A <a href={"http://lazilyevaluated.co/"}>Lazily Evaluated</a> production
+						</div>
+						<div>
+							Made by <a href={"http://karltryggvason.com/"} target="blank">Karl Tryggvason</a>
+						</div>
 					</div>
 				</nav>
 				<div id="toggle" className={"visible-xs visible-sm hidden-md " + (this.state.toggle? "" : "show")}>

@@ -333,7 +333,9 @@ class App extends Component{
 						<div className={"col-xs-12 col-md-offset-2 col-md-8 text-left"}>
 							<p>
 								I hope you enjoyed this statistical perspective into the history of the Essential Mix.
-								Again the code and the data can be found on <a target={"_blank"} href="https://github.com/Kalli/EssentialMixStats">Github</a>.
+								Big ups to <a href="https://www.mixesdb.com/">MixesDB</a> and the community over there,
+								their tireless trainspotting work is really neat. Again the code and the data
+								can be found on <a target={"_blank"} href="https://github.com/Kalli/EssentialMixStats">Github</a>.
 								If you see any bugs or inconsistencies in the data you can let me know on
 								<a target={"_blank"} href="http://twitter.com/karltryggvason">@karltryggvason</a> on Twitter or send me an
 								email <a href="mailto:ktryggvason@gmail.com">ktryggvason@gmail.com</a>.

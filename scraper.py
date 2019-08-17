@@ -229,6 +229,9 @@ def parse_tracks(mix_data):
             if label:
                 processed_track = processed_track.replace(label, '').strip()
                 label = label.replace('[', '').replace(']', '').strip()
+                # fix label casing
+                if label == 'RAM':
+                    label = 'Ram'
 
             segments = processed_track.split(' - ')
             if len(segments) > 1:

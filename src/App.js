@@ -164,7 +164,7 @@ class App extends Component{
 								pivotal role within the scene.
 							</p>
 							<p>
-								Using the crowdsourced tracklist website <a href="https://www.mixesdb.com/">MixesDB </a>
+								Using the crowdsourced tracklist website <a target={"_blank"} href="https://www.mixesdb.com/">MixesDB </a>
 								I gathered information about the performers, artists, tracklists and genres from more than
 								1400 editions of the Essential Mix. Look below for some insight into the history, evolution
 								and trends of the last 26 years in dance music.
@@ -172,7 +172,7 @@ class App extends Component{
 							<p>
 								If you are interested in the code behind both getting the data and visualising it or the
 								raw data itself you can find it on  <a target={"_blank"} href="https://github.com/Kalli/EssentialMixStats">Github</a>. If you
-								have any questions you can hit me up on <a target={"_blank"}  href="http://twitter.com/karltryggvason">
+								have any questions you can hit me up on <a target={"_blank"} href="http://twitter.com/karltryggvason">
 								@karltryggvason</a> on Twitter or shoot me an email at <a href="mailto:ktryggvason@gmail.com">
 								ktryggvason@gmail.com</a>.
 							</p>
@@ -223,13 +223,13 @@ class App extends Component{
 							<p>
 								You can see that right after bottoming out in 2001 the average number of tracks played in an Essential
 								Mix starts inching upwards. In the 90s the majority of mixes had between 20 and 30 tracks,
-								around 4-6 minutes per track on average. But around 15 years ago that started inching
+								around 4-6 minutes per track on average. But around 15 years ago that started moving
 								up to between 30 to 40 tracks per mix or 3-4 minutes per track.
 							</p>
 							<p>
 								The outliers also become more and more pronounced. Mixes with more than 50 songs are now
-								pretty standard and they regularly hit 60 to 70. <a href="https://www.mixesdb.com/w/2011-07-23_-_Brookes_Brothers_-_Essential_Mix">
-								The Brookes Brothers </a> set the record so far in 2011, with 115 tracks, just under a minute to each track.
+								pretty standard and they regularly hit 60 to 70. <a target={"_blank"} href="https://www.mixesdb.com/w/2011-07-23_-_Brookes_Brothers_-_Essential_Mix">
+								The Brookes Brothers </a> set the record so far in 2011, with 115 tracks, there's just over a minute for each track.
 								I get tired just thinking about it...
 							</p>
 							<p>

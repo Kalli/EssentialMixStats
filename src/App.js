@@ -248,7 +248,7 @@ class App extends Component{
 								and when.
 							</p>
 							<p>
-								In tracks, Donna Summer's disco classic <i>I Feel Love</i> and the Underworld stable
+								In tracks, Donna Summer's disco classic <i>I Feel Love</i>, <i>Mystery Land</i> by Y-Traxx and the Underworld stable
 								<i> Born Slippy</i> come in at the top with 15 plays each and after that its one classic
 								after the other. Older tracks naturally appear more frequently than newer tracks
 								(having had more years to have been played). Interesting to see Donna Summer top
@@ -339,6 +339,8 @@ class App extends Component{
 							</p>
 							<p>
 								Again the code and the data can be found on <a target={"_blank"} href="https://github.com/Kalli/EssentialMixStats">Github</a>.
+								Special thanks to <a href="https://github.com/coverprice">Coverprice</a> who provided
+								help on normalizing and cleaning up the <a href="https://github.com/Kalli/EssentialMixStats/pull/3">artist names</a>.
 								If you see any bugs or inconsistencies in the data you can let me know on
 								<a target={"_blank"} href="http://twitter.com/karltryggvason">@karltryggvason</a> on Twitter or send me an
 								email <a href="mailto:ktryggvason@gmail.com">ktryggvason@gmail.com</a>.

@@ -4,6 +4,7 @@ import re
 import json
 import time
 from copy import deepcopy
+from artist_name import NormalizedArtistName
 
 
 DATE_REGEX = re.compile('(\d{4}-\d{2}-\d{2})')
@@ -18,6 +19,7 @@ MIXES_TO_IGNORE = [
     '/w/1998-01_-_David_Holmes_-_Essential_Mix', '/w/2000_-_Fran%C3%A7ois_K_-_Essential_Mix'
 ]
 
+normalize = NormalizedArtistName()
 
 def parse_mix_link(link_tag):
     """
@@ -235,7 +237,7 @@ def parse_tracks(mix_data):
 
             segments = processed_track.split(' - ')
             if len(segments) > 1:
-                artist = segments[0].strip()
+                artist = normalize.get_canonical_artist_name(segments[0].strip())
                 # remove featuring listings from artists
                 for feat in [' Feat.', ' Featuring']:
                     if feat in artist:

@@ -1799,8 +1799,8 @@
     "Jon Cutler": [
         "John Cutler"
     ],
-    "Jon Tejada": [
-        "John Tejada"
+    "John Tejada": [
+        "Jon Tejada"
     ],
     "Jon Vesta": [
         "John Vesta"
@@ -1811,8 +1811,8 @@
     "Jonesey": [
         "Jonsey"
     ],
-    "Jonny D": [
-        "Johnny D"
+    "Johnny D": [
+        "Jonny D"
     ],
     "Jonny L": [
         "Johnny L"
@@ -1889,10 +1889,9 @@
         "KenDoh",
         "Kendoh"
     ],
-    "Ken Lou": [
-        "Kenlou"
-    ],
-    "Kenlou III": [
+    "Kenlou": [
+        "Ken Lou",
+        "Kenlou III",
         "KenLou III"
     ],
     "Kenny 'Dope' Gonzalez": [
@@ -2010,8 +2009,8 @@
         "Layo And Bushwacka",
         "Layo And Bushwacka!"
     ],
-    "Le Funk Mob": [
-        "La Funk Mob"
+    "La Funk Mob": [
+        "Le Funk Mob"
     ],
     "Led Zeppelin": [
         "Led Zepplin"
@@ -2383,8 +2382,8 @@
     "Mike Koglin": [
         "Mike Coglin"
     ],
-    "Mike Snow": [
-        "Miike Snow"
+    "Miike Snow": [
+        "Mike Snow"
     ],
     "Mikey Dread": [
         "Mike Dred"
@@ -2408,8 +2407,8 @@
     "Mirrorball": [
         "Mirror Ball"
     ],
-    "Miss Kitten": [
-        "Miss Kittin"
+    "Miss Kittin": [
+        "Miss Kitten"
     ],
     "Missy Elliott": [
         "Missy Eliot",
@@ -2433,9 +2432,6 @@
     ],
     "Monsta": [
         "MONSTA"
-    ],
-    "Moodymann": [
-        "Moodymanc"
     ],
     "Morel's Groove": [
         "Morel's Grooves"
@@ -2467,10 +2463,10 @@
     "Mr. Tophat & Art Alfie": [
         "Mr. Tophie & Art Alfie"
     ],
-    "Mr.Oizo": [
+    "Mr. Oizo": [
         "Mr Oizo",
         "Mr Ozio",
-        "Mr. Oizo",
+        "Mr.Oizo",
         "Mr. Ozio"
     ],
     "Mrs Woods": [
@@ -2559,9 +2555,9 @@
         "Novy vs Eniac",
         "Novy. vs Eniac"
     ],
-    "Nu Yorican Soul": [
+    "Nuyorican Soul": [
         "Nu Yoricon Soul",
-        "Nuyorican Soul"
+        "Nu Yorican Soul"
     ],
     "Nu-Birth": [
         "Nu Birth"
@@ -2661,8 +2657,8 @@
     "Paint": [
         "PAINT"
     ],
-    "Pangea": [
-        "Pangaea"
+    "Pangaea": [
+        "Pangea"
     ],
     "Pants & Corsets": [
         "Pants & Corset"
@@ -3066,8 +3062,6 @@
     ],
     "Roy Davis Jr.": [
         "Roy David JR",
-        "Roy Davies",
-        "Roy Davis",
         "Roy Davis JR",
         "Roy Davis Jnr",
         "Roy Davis Jr"
@@ -3139,9 +3133,9 @@
     "Samiyam": [
         "SAMIYAM"
     ],
-    "Samuel L. Sessions": [
+    "Samuel L Session": [
         "Samual L Session",
-        "Samuel L Session",
+        "Samuel L. Sessions",
         "Samuel L. Session",
         "Samuel Session"
     ],
@@ -3154,14 +3148,14 @@
     "Sandy Riviera": [
         "Sandy Rivera"
     ],
-    "Santagold": [
-        "Santogold"
+    "Santogold": [
+        "Santagold"
     ],
     "Sanxzero": [
         "SanXero"
     ],
-    "Sascha Funkye": [
-        "Sascha Funke"
+    "Sascha Funke": [
+        "Sascha Funkye"
     ],
     "Sasha & Emerson": [
         "Sasha / Emerson"
@@ -3294,9 +3288,9 @@
     "Sisqo": [
         "Sisko"
     ],
-    "Skream!": [
+    "Skream": [
         "Scream",
-        "Skream"
+        "Skream!"
     ],
     "Skullduggery": [
         "Skull Duggery"
@@ -3356,8 +3350,8 @@
     "Sound Design": [
         "Sound De-Zign"
     ],
-    "Sound Stream": [
-        "Soundstream"
+    "Soundstream": [
+        "Sound Stream"
     ],
     "Soundclash Republic": [
         "Sound Clash Republic"
@@ -3474,8 +3468,8 @@
     "Stylophonic": [
         "Stylophonics"
     ],
-    "Subfocus": [
-        "Sub Focus",
+    "Sub Focus": [
+        "Subfocus",
         "SubFocus"
     ],
     "Subjective": [
@@ -3714,9 +3708,9 @@
     "The Doors": [
         "Doors"
     ],
-    "The Doppler Effect": [
+    "Dopplereffekt": [
         "Dooplereffect",
-        "Dopplereffekt"
+        "The Doppler Effect"
     ],
     "The Dream Team": [
         "Dreem Team",

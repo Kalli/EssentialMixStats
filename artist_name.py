@@ -10,5 +10,5 @@ class NormalizedArtistName(object):
             for alternate_name in alternate_names:
                 self._normalized_names[alternate_name] = canonical_name
 
-    def get_canonical_artist_name(self, artist_name: str) -> str:
+    def get_canonical_artist_name(self, artist_name):
         return self._normalized_names.get(artist_name, artist_name)
